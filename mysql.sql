@@ -96,6 +96,7 @@ CREATE TABLE IF NOT EXISTS `shine_feedback` (
   `deleted` tinyint(4) NOT NULL,
   `reguser` varchar(255) NOT NULL,
   `regmail` varchar(255) NOT NULL,
+  `notes` text NOT NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
