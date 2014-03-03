@@ -1,4 +1,16 @@
 <?PHP
+
+	// Try and allow for 3 hours, just in case...
+	@set_time_limit(10800);
+
+	// Try and set some ini settings to buy us some time...
+	@ini_set('memory_limit', '512M');
+	@ini_set('upload_max_filesize', '512M');
+	@ini_set('post_max_size', '550M');
+	@ini_set('session.gc_maxlifetime', '10800');  // Allows for up to 3 hours
+	@ini_set('max_input_time', '10800');  // Allows for up to 3 hours
+	@ini_set('max_execution_time', '10800'); // Allows for up to 3 hours
+
 	require 'includes/master.inc.php';
 	$Auth->requireAdmin('login.php');
 	$nav = 'applications';
@@ -25,12 +37,20 @@
 			$v->signature      = sign_file($_FILES['file']['tmp_name'], $app->sparkle_pkey);
 			
 			$object = strtolower(preg_replace('/[^a-zA-Z0-9]/', '', $app->name)) . "_" . $v->version_number . "." . substr($_FILES['file']['name'], -3);
-			$v->url = slash($app->s3path) . $object;
 			$info   = parse_url($app->s3path);
 			$object = slash($info['path']) . $object;
-			chmod($_FILES['file']['tmp_name'], 0755);
-			$s3 = new S3($app->s3key, $app->s3pkey);
-			$s3->uploadFile($app->s3bucket, $object, $_FILES['file']['tmp_name'], true);
+			chmod($_FILES['file']['tmp_name'], 0755);	
+			
+			// Manually update / upload the file for the Sparkle update
+			// Put the full path to the applications upload folder in the S3 URL field.
+			
+			move_uploaded_file( $_FILES['file']['tmp_name'], $_POST['dir'] . basename( $_FILES['file']['name'] ) );
+			$v->url = slash($app->s3path) . $_FILES['file']['name'];
+			
+			// Not using S3 for hosting of our Sparkle Updates
+			
+			//$s3 = new S3($app->s3key, $app->s3pkey);
+			//$s3->uploadFile($app->s3bucket, $object, $_FILES['file']['tmp_name'], true);
 			$v->insert();
 
 			redirect('versions.php?id=' . $app->id);
@@ -90,7 +110,10 @@
 								<p><label for="version_number">Sparkle Version Number</label> <input type="text" name="version_number" id="version_number" value="<?PHP echo $version_number;?>" class="text"></p>
 								<p><label for="human_version">Human Readable Version Number</label> <input type="text" name="human_version" id="human_version" value="<?PHP echo $human_version;?>" class="text"></p>
 								<p><label for="release_notes">Release Notes</label> <textarea class="text" name="release_notes" id="release_notes"><?PHP echo $release_notes; ?></textarea></p>
-								<p><label for="file">Application Archive</label> <input type="file" name="file" id="file"></p>
+								
+								<!-- Make sure that when you set the upload directory you must set the path relative to your shine installation use ../ relative up / down directory path indicators in the text field -->
+                                                                <p><label for="dir">Base Dir</label> <input type="text" name="dir" id="dir" value=""></p>
+                                                                <p><label for="file">Application Archive</label> <input type="file" name="file" id="file"></p>
 								<p><input type="submit" name="btnCreateVersion" value="Create Version" id="btnCreateVersion"></p>
 							</form>
 						</div>
