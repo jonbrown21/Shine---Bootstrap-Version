@@ -51,56 +51,89 @@
 			$categories = "'" . implode(',', $categories) . "'";
 			$data = implode(',', $this->data);
 
-			$out  = "{$this->id} = new Highcharts.Chart({";
-			$out .= "chart: { renderTo: '{$this->id}', defaultSeriesType: 'column' },";
-			$out .= "title: { text: '{$this->title}' },";
-			$out .= "xAxis: { categories: [$categories] },";
-			$out .= "yAxis: { title: { text: '{$this->yAxisTitle}' } },";
-			$out .= "series: [{ data: [$data] },]";
+
+			$out1  = "var barChartData3 = {\n"; 
+			$out1 .= "		labels : [$data],\n"; 
+			$out1 .=  "		datasets : [\n"; 
+			$out1 .=  "			{\n"; 
+			$out1 .=  "				fillColor : \"rgba(220,220,220,0.5)\",\n"; 
+			$out1 .=  "				strokeColor : \"rgba(220,220,220,0.8)\",\n"; 
+			$out1 .=  "				highlightFill: \"rgba(220,220,220,0.75)\",\n"; 
+			$out1 .=  "				highlightStroke: \"rgba(220,220,220,1)\",\n"; 
+			$out1 .=  "				data : [$data]\n"; 
+			$out1 .=  "			}\n"; 
+			$out1 .=  "		]\n"; 
+			$out1 .=  "\n"; 
+			$out1 .=  "	}\n";
+
+			$out  = "var ctx3 = document.getElementById(\"canvas3\").getContext(\"2d\");";
+			$out .= "window.myBar3 = new Chart(ctx3).Bar(barChartData3, {";
+			$out .= "responsive : true";
 			$out .= "});";
 
+			echo $out1;
 			echo $out;
 		}
 	}
 ?>
 <?PHP include('inc/header.inc.php'); ?>
 
-        <div id="bd">
-            <div id="yui-main">
-                <div class="yui-b"><div class="yui-g">
 
+<div class="row">
+<div class="col-lg-12">
 
-                    <div class="block tabs spaces">
-                        <div class="hd">
-                            <h2>Sparkle Stats</h2>
-							<ul>
-								<li class="<?PHP if(!isset($_GET['id'])) echo 'active'; ?>"><a href="stats.php">All Apps</a></li>
-								<?PHP foreach($applications as $a) : ?>
-								<li class="<?PHP if(@$_GET['id'] == $a->id) echo 'active'; ?>"><a href="stats.php?id=<?PHP echo $a->id; ?>"><?PHP echo $a->name; ?></a></li>
-								<?PHP endforeach; ?>
-							</ul>
-							<div class="clear"></div>
+ <h1 class="page-header">Sparkle Stats</h1>
+
+<ul class="nav nav-pills">
+<li class="<?PHP if(!isset($_GET['id'])) echo 'active'; ?>"><a href="stats.php">All Apps</a></li>
+<?PHP foreach($applications as $a) : ?>
+<li class="<?PHP if(@$_GET['id'] == $a->id) echo 'active'; ?>"><a href="stats.php?id=<?PHP echo $a->id; ?>"><?PHP echo $a->name; ?></a></li>
+<?PHP endforeach; ?>
+</ul>
+
+</div>
+
+</div>
+
+<br><br>
+
+<div class="row">
+<div class="col-lg-12">
+                   <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-bar-chart-o fa-fw"></i> Stats
                         </div>
-					</div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="row">
+                                <div style="margin: 20px;">
 
-					<div class="block" style="float:left;margin-right:2em;width:100%;">
-						<div class="hd">
-							<h2>OS Version</h2>
-						</div>
-						<div class="bd">
-							<div id="chart_app_activity" class="chart"></div>
-						</div>
-					</div>
-              
-                </div></div>
-            </div>
-            <div id="sidebar" class="yui-b">
+			<canvas id="canvas3"></canvas>
 
-            </div>
-        </div>
+                                </div>
+                                <!-- /.col-lg-8 (nested) -->
+                            </div>
+                    
+
+
+</div>
+
+	</div>						
+					
 
 <?PHP include('inc/footer.inc.php'); ?>
 <script type="text/javascript" charset="utf-8">
+
+var options = {
+        scaleFontColor: "#fa0",
+        datasetStrokeWidth: 1,
+        scaleShowLabels : false,
+        animation : false,
+        bezierCurve : true,
+        scaleStartValue: 0,
+		showXLabels: 1,
+    };
+
 	$(document).ready(function() {
 		<?PHP $chart_app_activity->render(); ?>
 	});

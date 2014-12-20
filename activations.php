@@ -45,61 +45,64 @@
 ?>
 <?PHP include('inc/header.inc.php'); ?>
 
-        <div id="bd">
-            <div id="yui-main">
-                <div class="yui-b"><div class="yui-g">
+<div class="row">
+<div class="col-lg-12">
 
+ <h1 class="page-header">Activations</h1>
 
-                    <div class="block tabs spaces">
-                        <div class="hd">
-                            <h2>Activations</h2>
-							<ul>
+<ul class="nav nav-pills">
 								<li class="<?PHP if(!isset($_GET['id'])) echo 'active'; ?>"><a href="activations.php">All Activations</a></li>
 								<?PHP foreach($applications as $a) : if(!in_array($a->id, $available_apps)) continue; ?>
 								<li class="<?PHP if(@$_GET['id'] == $a->id) echo 'active'; ?>"><a href="activations.php?id=<?PHP echo $a->id; ?>"><?PHP echo $a->name; ?></a></li>
 								<?PHP endforeach; ?>
-							</ul>
-							<div class="clear"></div>
-                        </div>
-                        <div class="bd">
-	                        <ul class="pager">
-                                <li><a href="activations.php?page=<?PHP echo $pager->prevPage(); ?>&amp;id=<?PHP echo @$app_id; ?>">&#171; Prev</a></li>
-								<?PHP for($i = 1; $i <= $pager->numPages; $i++) : ?>
-								<?PHP if($i == $pager->page) : ?>
-                                <li class="active"><a href="activations.php?page=<?PHP echo $i; ?>&amp;id=<?PHP echo @$app_id; ?>"><?PHP echo $i; ?></a></li>
-								<?PHP else : ?>
-                                <li><a href="activations.php?page=<?PHP echo $i; ?>&amp;id=<?PHP echo @$app_id; ?>"><?PHP echo $i; ?></a></li>
-								<?PHP endif; ?>
-								<?PHP endfor; ?>
-                                <li><a href="activations.php?page=<?PHP echo $pager->nextPage(); ?>&amp;id=<?PHP echo @$app_id; ?>">Next &#187;</a></li>
-                            </ul>
-							<div class="clear"></div>
+</ul>
 
-                            <table class="lines">
-                                <thead>
-                                    <tr>
-										<td>Application</td>
-										<td>Email</td>
-										<td>Activation Date</td>
-										<td>Serial Number</td>
-										<td>IP</td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-									<?PHP foreach($activations as $act) : ?>
-									<tr class="<?PHP if($act->order_id == '') { echo 'fraud'; } ?>">
+</div>
+
+</div>
+
+<br><br>
+
+
+<div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Your Applications
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+										<th>Application</th>
+										<th>Email</th>
+										<th>Activation Date</th>
+										<th>Serial Number</th>
+										<th>IP</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+<?PHP foreach($activations as $act) : ?>
+
+                                        <tr class="<?PHP if($act->order_id == '') { echo 'fraud'; } ?>">
 										<td><?PHP echo $act->applicationName(); ?></td>
 										<td><a href="order.php?id=<?PHP echo $act->order_id; ?>"><?PHP echo $act->name; ?></a></td>
 										<td><?PHP echo dater($act->dt, 'm/d/Y g:ia') ?></td>
 										<td><?PHP echo array_shift(explode('-', $act->serial_number)); ?>...</td>
 										<td><?PHP echo $act->ip; ?></td>
-									</tr>
-									<?PHP endforeach; ?>
-                                </tbody>
-                            </table>
-
-	                        <ul class="pager">
-                                <li><a href="activations.php?page=<?PHP echo $pager->prevPage(); ?>&amp;id=<?PHP echo @$app_id; ?>">&#171; Prev</a></li>
+                                        </tr>
+<?PHP endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                
+<hr>            <!-- /.table-responsive -->
+<div class="text-center">
+<ul class="pagination">
+							  <li><a href="activations.php?page=<?PHP echo $pager->prevPage(); ?>&amp;id=<?PHP echo @$app_id; ?>">&#171; Prev</a></li>
 								<?PHP for($i = 1; $i <= $pager->numPages; $i++) : ?>
 								<?PHP if($i == $pager->page) : ?>
                                 <li class="active"><a href="activations.php?page=<?PHP echo $i; ?>&amp;id=<?PHP echo @$app_id; ?>"><?PHP echo $i; ?></a></li>
@@ -108,66 +111,76 @@
 								<?PHP endif; ?>
 								<?PHP endfor; ?>
                                 <li><a href="activations.php?page=<?PHP echo $pager->nextPage(); ?>&amp;id=<?PHP echo @$app_id; ?>">Next &#187;</a></li>
-                            </ul>
-							<div class="clear"></div>
-						</div>
-					</div>
-              
-                </div></div>
-            </div>
-            <div id="sidebar" class="yui-b">
-				<div class="block">
-					<div class="hd">
-						Search Activations
-					</div>
-					<div class="bd">
-						<form action="activations.php?id=<?PHP echo @$app_id; ?>" method="get">
-							<p><input type="text" name="q" value="<?PHP echo @$q; ?>" id="q" class="text">
-							<span class="info">Searches email, serial number, and IP address.</span></p>
-							<p><input type="submit" name="btnSearch" value="Search" id="btnSearch"></p>
-						</form>
-					</div>
-				</div>
+</ul>
+</div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+</div>
 
-				<div class="block">
-					<div class="hd">
-						<h2>Top Emails</h2>
-					</div>
-					<div class="bd">
-						<ul class="biglist">
+
+
+<div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Top Emails
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <ul class="biglist">
 							<?PHP foreach($top_emails as $x) : ?>
 							<li><a href="activations.php?q=<?PHP echo $x['name']; ?>"><?PHP echo $x['name']; ?> (<?PHP echo $x['num']; ?>)</a></li>
 							<?PHP endforeach; ?>
 						</ul>
-					</div>
-				</div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+</div>	
+</div>
 
-				<div class="block">
-					<div class="hd">
-						<h2>Top Serials</h2>
-					</div>
-					<div class="bd">
-						<ul class="biglist">
+<div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Top Serials
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <ul class="biglist">
 							<?PHP foreach($top_serials as $x) : ?>
 							<li><a href="activations.php?q=<?PHP echo $x['serial_number']; ?>"><?PHP echo array_shift(explode('-', $x['serial_number'])); ?>... (<?PHP echo $x['num']; ?>)</a></li>
 							<?PHP endforeach; ?>
 						</ul>
-					</div>
-				</div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+</div>	
+</div>
 
-				<div class="block">
-					<div class="hd">
-						<h2>Top IPs</h2>
-					</div>
-					<div class="bd">
-						<ul class="biglist">
+<div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Top IPs
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <ul class="biglist">
 							<?PHP foreach($top_ips as $x) : ?>
 							<li><a href="activations.php?q=<?PHP echo $x['ip']; ?>"><?PHP echo $x['ip']; ?> (<?PHP echo $x['num']; ?>)</a></li>
 							<?PHP endforeach; ?>
 						</ul>
-					</div>
-				</div>
-            </div>
-        </div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+</div>	
+</div>
 
+           
 <?PHP include('inc/footer.inc.php'); ?>

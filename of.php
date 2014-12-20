@@ -28,7 +28,7 @@
 
     mysql_query($query, $db->db) or die('error');
 
-	$link = 'http://shine.clickontyler.com/feedback-view.php?id=' . $db->insertId();
+	$link = 'http://shine.jonbrown.org/feedback-view.php?id=' . $db->insertId();
 
     $message  = "$link\n\n";
 	$message .= "From: {$_POST['email']}\n";

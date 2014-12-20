@@ -61,27 +61,38 @@
     }
 ?>
 <?PHP include('inc/header.inc.php'); ?>
+<div class="row">
+<div class="col-lg-12">
 
-        <div id="bd">
-            <div id="yui-main">
-                <div class="yui-b"><div class="yui-g">
+ <h1 class="page-header">Tweets</h1>
 
-
-                    <div class="block tabs spaces">
-                        <div class="hd">
-                            <h2>Orders</h2>
-							<ul>
+<ul class="nav nav-pills">
 								<li class="<?PHP if(!isset($_GET['id'])) echo 'active'; ?>"><a href="tweets.php">All Apps</a></li>
 								<?PHP foreach($applications as $a) : ?>
 								<?PHP if(!in_array($a->id, $available_apps)) continue; ?>
 								<li class="<?PHP if(@$_GET['id'] == $a->id) echo 'active'; ?>"><a href="tweets.php?id=<?PHP echo $a->id; ?>"><?PHP echo $a->name; ?></a></li>
 								<?PHP endforeach; ?>
-							</ul>
-							<div class="clear"></div>
+</ul>
+
+</div>
+
+</div>
+
+<br><br>
+
+
+
+<div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Tweets
                         </div>
-                        <div class="bd">
-                            <table class="lines">
-                                <tbody>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <tbody>
                                     <?PHP foreach($tweets as $t) : ?>
                                     <?PHP if($t->new) : ?>
                                     <tr class="highlight">
@@ -108,38 +119,53 @@
                                     </tr>
                                     <?PHP endforeach; ?>
                                 </tbody>
-                            </table>
-						</div>
-					</div>
-              
-                </div></div>
-            </div>
-            <div id="sidebar" class="yui-b">
-                <div class="block">
-                    <div class="hd">
-                        <h3>Summary</h3>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- /.panel-body -->
                     </div>
-                    <div class="bd">
-                        <p><?PHP echo count($tweets); ?> tweets</p>
+                    <!-- /.panel -->
+                </div>
+</div>
+
+
+<div class="row">
+                <div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Summary
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <p><?PHP echo count($tweets); ?> tweets</p>
                         <p><a href="tweets.php?id=<?PHP echo $app_id; ?>&amp;read=1">Mark all as read</a></p>
                         <p><a href="tweets.php?id=<?PHP echo $app_id; ?>&amp;refresh=1">Refresh All</a></p>
+                        </div>
+                        <!-- /.panel-body -->
                     </div>
-                </div>
-                <div class="block">
-                    <div class="hd">
-                        <h3>Tweet Terms</h3>
-                    </div>
-                    <div class="bd">
-						<ul class="biglist">
+                    <!-- /.panel -->
+</div>	
+
+                <div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Tweet Terms
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                         <ul class="biglist">
 							<?PHP foreach($tweet_terms as $tt) : ?>
 							<?PHP foreach(explode(',', $tt) as $term) : ?>
 							<li><a href="http://search.twitter.com/search?q=<?PHP echo urlencode($term); ?>"><?PHP echo $term; ?></a></li>
 							<?PHP endforeach; ?>
 							<?PHP endforeach; ?>
 						</ul>
+                        </div>
+                        <!-- /.panel-body -->
                     </div>
-                </div>
-            </div>
-        </div>
+                    <!-- /.panel -->
+</div>	
+</div>
+
 
 <?PHP include('inc/footer.inc.php'); ?>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rss version="2.0" xmlns:dazzle="http://www.quintusquill.com/specs/dazzle-xmlns/">	
+	<channel>
+		<title>Deficit Appcast</title>
+		<link>http://updates.jonbrown.org/appcasts/deficit-appcast.xml</link>
+		<description>Appcast for Deficit Widget</description>
+		<language>en-us</language>
+		<docs>http://www.jonbrown.org/widgets/</docs>
+		<lastBuildDate>Mon, 21 November 2011 15:52:28 GMT</lastBuildDate>
+		<item>
+			<title>Deficit Widget 3.2 Released</title>
+			<pubDate>Mon, 21 November 2011 15:52:28 GMT</pubDate>
+			<link>http://www.jonbrown.org/widgets/</link>
+			<releaseNotesURL>http://www.jonbrown.org/widgets/</releaseNotesURL>
+			<description>
+				Deficit Widget 3.2 has been released. Many bugs have been fixed.
+			</description>
+			
+			<enclosure url="http://www.jonbrown.org/updates/files/widgets/deficit.zip" dazzle:version="3.2" dazzle:minimumSystemVersion="10.5" length="1234567" type="application/zip" />
+		</item>
+		<item>
+			<title>Deficit Widget 3.1 Released</title>
+			<pubDate>Mon, 21 November 2011 15:52:28 GMT</pubDate>
+			<link>http://www.jonbrown.org/widgets/</link>
+			<releaseNotesURL>http://www.jonbrown.org/widgets/</releaseNotesURL>
+			<description>
+				Deficit Widget 3.1 has been released. Many bugs have been fixed.
+			</description>
+			
+			<enclosure url="http://www.jonbrown.org/updates/files/widgets/deficit.zip" dazzle:version="3.1" dazzle:minimumSystemVersion="10.5" length="1234567" type="application/zip" />
+		</item>
+		<item>
+			<title>Deficit Widget 3.0 Released</title>
+			<pubDate>Mon, 21 November 2011 15:52:28 GMT</pubDate>
+			<link>http://www.jonbrown.org/widgets/</link>
+			<releaseNotesURL>http://www.jonbrown.org/widgets/</releaseNotesURL>
+			<description>
+				Deficit Widget 3.0 has been released. Many bugs have been fixed.
+			</description>
+			
+			<enclosure url="http://www.jonbrown.org/updates/files/widgets/deficit.zip" dazzle:version="3.0" dazzle:minimumSystemVersion="10.5" length="1234567" type="application/zip" />
+		</item>
+	
+	</channel>
+</rss>

@@ -31,7 +31,7 @@
 
 	// Downloads in last 30 days
 	$sel = "TO_DAYS(dt)";
-	$order_totals    = $db->getRows("SELECT $sel as dtstr, COUNT(*) FROM shine_downloads WHERE DATE_ADD(dt, INTERVAL 30 DAY) > NOW() GROUP BY $sel ORDER BY $sel ASC");
+	$order_totals2    = $db->getRows("SELECT $sel as dtstr, COUNT(*) FROM shine_downloads WHERE DATE_ADD(dt, INTERVAL 30 DAY) > NOW() GROUP BY $sel ORDER BY $sel ASC");
 	$opw30           = new googleChart(implode(',', gimme($order_totals, 'COUNT(*)')), 'bary');
 	$opw30->showGrid   = 1;
 	$opw30->dimensions = '280x100';
@@ -40,60 +40,85 @@
 	$opw30_fb->dimensions = '640x400';
 ?>
 <?PHP include('inc/header.inc.php'); ?>
-        <div id="bd">
-            <div id="yui-main">
-                <div class="yui-b"><div class="yui-g">
 
-                    <div class="block">
-                        <div class="hd">
-                            <h2>Your Applications</h2>
+
+
+<div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header"> Dashboard</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+             <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Your Applications
                         </div>
-                        <div class="bd">
-                            <table class="lines">
-                                <thead>
-                                    <tr>
-                                        <td>Name</td>
-                                        <td>Current Version</td>
-										<td>Last Release Date</td>
-										<td>Downloads / Updates</td>
-										<td>Support Questions</td>
-										<td>Bug Reports</td>
-										<td>Feature Requests</td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-									<?PHP foreach($apps as $a) : ?>
-									<tr>
-	                                    <td><a href="application.php?id=<?PHP echo $a->id;?>"><?PHP echo $a->name; ?></a></td>
-	                                    <td><?PHP echo $a->strCurrentVersion(); ?></td>
-										<td><?PHP echo $a->strLastReleaseDate(); ?></td>
-										<td><a href="versions.php?id=<?PHP echo $a->id; ?>"><?PHP echo number_format($a->totalDownloads()); ?></a> / <a href="versions.php?id=<?PHP echo $a->id; ?>"><?PHP echo number_format($a->totalUpdates()); ?></a></td>
-										<td><?PHP echo $a->numSupportQuestions(); ?></td>
-										<td><?PHP echo $a->numBugReports(); ?></td>
-										<td><?PHP echo $a->numFeatureRequests(); ?></td>
-									</tr>
-									<?PHP endforeach; ?>
-                                </tbody>
-                            </table>
-						</div>
-					</div>
-					
-					<div class="block">
-    					<div class="hd">
-    						<h2>Recent Orders (<?PHP echo number_format(Order::totalOrders()); ?> total)</h2>
-    					</div>
-    					<div class="bd">
-    					    <table class="lines">
-    					        <thead>
-    					            <tr>
-    					                <td>Date</td>
-    					                <td>Name</td>
-    					                <td>Email</td>
-    					                <td>App Name</td>
-    					            </tr>
-    					        </thead>
-    					        <tbody>
-        							<?PHP foreach($orders as $o) : ?>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Current Version</th>
+                                            <th>Last Release Date</th>
+                                            <th>Downloads / Updates</th>
+					    					  <th>Support Questions</th>
+                                            <th>Bug Reports</th>
+                                            <th>Feature Requests</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+<?PHP foreach($apps as $a) : ?>
+
+                                        <tr>
+                                            <td><a href="application.php?id=<?PHP echo $a->id;?>"><?PHP echo $a->name; ?></a></td>
+                                            <td><?PHP echo $a->strCurrentVersion(); ?></td>
+                                            <td><?PHP echo $a->strLastReleaseDate(); ?></td>
+                                            <td><a href="versions.php?id=<?PHP echo $a->id; ?>"><?PHP echo number_format($a->totalDownloads()); ?></a> / <a href="versions.php?id=<?PHP echo $a->id; ?>"><?PHP echo number_format($a->totalUpdates()); ?></a></td>
+                                            <td><?PHP echo $a->numSupportQuestions(); ?></td>
+                                            <td><?PHP echo $a->numBugReports(); ?></td>
+                                            <td><?PHP echo $a->numFeatureRequests(); ?></td>
+                                        </tr>
+<?PHP endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.table-responsive -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+
+
+
+
+
+
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Recent Orders (<?PHP echo number_format(Order::totalOrders()); ?> total)
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>App Name</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?PHP foreach($orders as $o) : ?>
         							<tr>
         							    <td><?PHP echo time2str($o->dt); ?></td>
         							    <td><a href="order.php?id=<?PHP echo $o->id; ?>"><?PHP echo utf8_encode($o->first_name); ?> <?PHP echo utf8_encode($o->last_name); ?></a></td>
@@ -101,61 +126,123 @@
         							    <td><?PHP echo $o->applicationName(); ?></td>
         							</tr>
         							<?PHP endforeach; ?>
-    					        </tbody>
-    					    </table>
-    					</div>
-    				</div>
-              
-                </div></div>
-            </div>
-            <div id="sidebar" class="yui-b">
-				<div class="block">
-					<div class="hd">
-						Search Orders
-					</div>
-					<div class="bd">
-						<form action="orders.php?id=<?PHP echo @$app_id; ?>" method="get">
-							<p><input type="text" name="q" value="<?PHP echo @$q; ?>" id="q" class="text">
-							<span class="info">Searches Buyer's Name and Email address.</span></p>
-							<p><input type="submit" name="btnSearch" value="Search" id="btnSearch"> | <a href="order-new.php">Create Manual Order</a></p>
-						</form>
-					</div>
-				</div>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.table-responsive -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
 
-				<div class="block">
-					<div class="hd">
-						<h2>Downloads 24 Hours</h2>
-					</div>
-					<div class="bd">
-						<a href="<?PHP echo $opw24_fb->draw(false); ?>" class="fb"><?PHP $opw24->draw(); ?></a>
-					</div>
-				</div>
+<div class="row">
+<div class="col-lg-12">
+<div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-bar-chart-o fa-fw"></i> Downloads 30 Days
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                             <div class="row">
+                                <div style="margin: 20px;">
 
-				<div class="block">
-					<div class="hd">
-						<h2>Downloads 30 Days</h2>
-					</div>
-					<div class="bd">
-						<a href="<?PHP echo $opw30_fb->draw(false); ?>" class="fb"><?PHP $opw30->draw(); ?></a>
-					</div>
-				</div>				
-				
-				<div class="block">
-					<div class="hd">
-						<h2>Create an Application</h2>
-					</div>
-					<div class="bd">
-						<form action="index.php" method="post">
-		                    <p>
-								<label for="test1">Application Name</label>
-		                        <input type="text" class="text" name="name" id="appname" value="">
-		                    </p>
-							<p><input type="submit" name="btnNewApp" value="Create Application" id="btnNewApp"></p>
-						</form>	
-					</div>
-				</div>
+			<canvas id="canvas"></canvas>
 
-            </div>
-        </div>
+                                </div>
+                                <!-- /.col-lg-8 (nested) -->
+                            </div>
+                    
+
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                    
+
+
+</div>
+
+
+<div class="col-lg-6">
+                   <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-bar-chart-o fa-fw"></i> Downloads 24 Hours
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="row">
+                                <div style="margin: 20px;">
+
+			<canvas id="canvas2"></canvas>
+
+                                </div>
+                                <!-- /.col-lg-8 (nested) -->
+                            </div>
+                    
+
+
+</div>
+
+</div>
+
+
+            <!-- /.row -->
+
 
 <?PHP include('inc/footer.inc.php'); ?>
+
+<script>
+	var options = {
+        scaleFontColor: "#fa0",
+        datasetStrokeWidth: 1,
+        scaleShowLabels : false,
+        animation : false,
+        bezierCurve : true,
+        scaleStartValue: 0,
+		showXLabels: 1,
+    };
+
+
+var barChartData2 = {
+		labels : [<?PHP print_r(implode(',', gimme($order_totals, 'COUNT(*)'))); ?>],
+		datasets : [
+			{
+				fillColor : "rgba(220,220,220,0.5)",
+				strokeColor : "rgba(220,220,220,0.8)",
+				highlightFill: "rgba(220,220,220,0.75)",
+				highlightStroke: "rgba(220,220,220,1)",
+				data : [<?PHP print_r(implode(',', gimme($order_totals, 'COUNT(*)'))); ?>]
+			}
+		]
+
+	}
+
+	var barChartData = {
+		labels : [<?PHP print_r(implode(',', gimme($order_totals2, 'COUNT(*)'))); ?>],
+		datasets : [
+			{
+				fillColor : "rgba(220,220,220,0.5)",
+				strokeColor : "rgba(220,220,220,0.8)",
+				highlightFill: "rgba(220,220,220,0.75)",
+				highlightStroke: "rgba(220,220,220,1)",
+				data : [<?PHP print_r(implode(',', gimme($order_totals2, 'COUNT(*)'))); ?>]
+			}
+		]
+
+	}
+
+window.onload = function(){
+		var ctx = document.getElementById("canvas").getContext("2d");
+		window.myBar = new Chart(ctx).Bar(barChartData, {
+			responsive : true
+		});
+
+var ctx2 = document.getElementById("canvas2").getContext("2d");
+		window.myBar2 = new Chart(ctx2).Bar(barChartData2, {
+			responsive : true
+		});
+	}
+
+</script>

@@ -90,40 +90,63 @@
 ?>
 <?PHP include('inc/header.inc.php'); ?>
 
-        <div id="bd">
-            <div id="yui-main">
-                <div class="yui-b"><div class="yui-g">
 
-                    <div class="block tabs spaces">
-						<?PHP echo $Error; ?>
-                        <div class="hd">
-                            <h2>Applications</h2>
-							<ul>
-								<li><a href="application.php?id=<?PHP echo $app->id; ?>"><?PHP echo $app->name; ?></a></li>
-								<li><a href="versions.php?id=<?PHP echo $app->id; ?>">Versions</a></li>
-								<li class="active"><a href="version-new.php?id=<?PHP echo $app->id; ?>">Release New Version</a></li>
-							</ul>
-							<div class="clear"></div>
+<div class="row">
+<div class="col-lg-12">
+
+<h1 class="page-header">Applications</h1>
+
+<ul class="nav nav-pills">
+<li><a href="application.php?id=<?PHP echo $app->id; ?>"><?PHP echo $app->name; ?></a></li>
+<li><a href="versions.php?id=<?PHP echo $app->id; ?>">Versions</a></li>
+<li class="active"><a href="version-new.php?id=<?PHP echo $app->id; ?>">Release New Version</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<br><br>
+
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Create Manual Order
                         </div>
-                        <div class="bd">
-							<form action="version-new.php?id=<?PHP echo $app->id; ?>" method="post" enctype="multipart/form-data">
-								<p><label for="version_number">Sparkle Version Number</label> <input type="text" name="version_number" id="version_number" value="<?PHP echo $version_number;?>" class="text"></p>
-								<p><label for="human_version">Human Readable Version Number</label> <input type="text" name="human_version" id="human_version" value="<?PHP echo $human_version;?>" class="text"></p>
+                        <div class="panel-body">
+                            <div class="row">
+  
+                                <div class="col-lg-12">
+                                    
+<form action="version-new.php?id=<?PHP echo $app->id; ?>" method="post" enctype="multipart/form-data">
+								<p><label for="version_number">Sparkle Version Number</label> <input type="text" name="version_number" id="version_number" value="<?PHP echo $version_number;?>" class="form-control"></p>
+								<p><label for="human_version">Human Readable Version Number</label> <input type="text" name="human_version" id="human_version" value="<?PHP echo $human_version;?>" class="form-control"></p>
 								<p><label for="release_notes">Release Notes</label> <textarea class="text" name="release_notes" id="release_notes"><?PHP echo $release_notes; ?></textarea></p>
 								
 								<!-- Make sure that when you set the upload directory you must set the path relative to your shine installation use ../ relative up / down directory path indicators in the text field -->
-                                                                <p><label for="dir">Base Dir</label> <input type="text" name="dir" id="dir" value=""></p>
-                                                                <p><label for="file">Application Archive</label> <input type="file" name="file" id="file"></p>
-								<p><input type="submit" name="btnCreateVersion" value="Create Version" id="btnCreateVersion"></p>
+                                                                <p><label for="dir">Base Dir</label> <input type="text" name="dir" id="dir" value="" class="form-control"></p>
+                                                                <p><label for="file">Application Archive</label> <input type="file" name="file" id="file" class="form-control"></p>
+								<p><input type="submit" name="btnCreateVersion" value="Create Version" id="btnCreateVersion" class="btn btn-lg btn-success btn-block"></p>
 							</form>
-						</div>
-					</div>
-              
-                </div></div>
-            </div>
-            <div id="sidebar" class="yui-b">
 
+                                </div>
+                                <!-- /.col-lg-6 (nested) -->
+                            </div>
+                            <!-- /.row (nested) -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
             </div>
-        </div>
+            <!-- /.row -->
+
+
+
+
+
 
 <?PHP include('inc/footer.inc.php'); ?>

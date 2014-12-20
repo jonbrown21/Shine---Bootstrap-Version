@@ -1,6 +1,25 @@
-        <div id="ft"></div>
+ </div>
+        <!-- /#page-wrapper -->
+
     </div>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js" type="text/javascript"></script>
-	<script src="js/highcharts.js" type="text/javascript"></script>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="js/plugins/metisMenu/metisMenu.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="js/sb-admin-2.js"></script>
+	<script src="js/plugins/charts/Charts.js"></script>
+
+
+
+
 </body>
+
 </html>

@@ -11,6 +11,6 @@
 	}
 	else
 	{
-		die("Thank you for your order. Your registration information will be emailed to you shortly. If you have any questions, feel free to contact <a href='mailto:support@clickontyler.com'>support@clickontyler.com</a>");
+		die("Thank you for your order. Your registration information will be emailed to you shortly. If you have any questions, feel free to contact <a href='mailto:jon@jonbrown.org'>jon@jonbrown.org</a>");
 	}
 	

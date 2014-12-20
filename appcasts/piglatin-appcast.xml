@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rss version="2.0" xmlns:dazzle="http://www.quintusquill.com/specs/dazzle-xmlns/">	
+	<channel>
+		<title>Pig Latin Appcast</title>
+		<link>http://updates.jonbrown.org/appcasts/piglatin-appcast.xml</link>
+		<description>Appcast for Pig Latin Widget</description>
+		<language>en-us</language>
+		<docs>http://www.jonbrown.org/widgets/</docs>
+		<lastBuildDate>Mon, 21 November 2011 15:52:28 GMT</lastBuildDate>
+		<item>
+			<title>Pig Latin Widget 2.2 Released</title>
+			<pubDate>Mon, 21 November 2011 15:52:28 GMT</pubDate>
+			<link>http://www.jonbrown.org/widgets/</link>
+			<releaseNotesURL>http://www.jonbrown.org/widgets/</releaseNotesURL>
+			<description>
+				Pig Latin Widget 2.2 has been released. Many bugs have been fixed.
+			</description>
+			
+			<enclosure url="http://www.jonbrown.org/updates/files/widgets/pigwidget.zip" dazzle:version="2.2" dazzle:minimumSystemVersion="10.5" length="1234567" type="application/zip" />
+		</item>
+		<item>
+			<title>Pig Latin Widget 2.1 Released</title>
+			<pubDate>Mon, 21 November 2011 15:52:28 GMT</pubDate>
+			<link>http://www.jonbrown.org/widgets/</link>
+			<releaseNotesURL>http://www.jonbrown.org/widgets/</releaseNotesURL>
+			<description>
+				Pig Latin Widget 2.1 has been released. Many bugs have been fixed.
+			</description>
+			
+			<enclosure url="http://www.jonbrown.org/updates/files/widgets/pigwidget.zip" dazzle:version="2.1" dazzle:minimumSystemVersion="10.5" length="1234567" type="application/zip" />
+		</item>
+		<item>
+			<title>Pig Latin Widget 2.0 Released</title>
+			<pubDate>Mon, 21 November 2011 15:52:28 GMT</pubDate>
+			<link>http://www.jonbrown.org/widgets/</link>
+			<releaseNotesURL>http://www.jonbrown.org/widgets/</releaseNotesURL>
+			<description>
+				Pig Latin Widget 2.0 has been released. Many bugs have been fixed.
+			</description>
+			
+			<enclosure url="http://www.jonbrown.org/updates/files/widgets/pigwidget.zip" dazzle:version="2.0" dazzle:minimumSystemVersion="10.5" length="1234567" type="application/zip" />
+		</item>
+	
+	</channel>
+</rss>

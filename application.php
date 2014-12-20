@@ -107,163 +107,277 @@
 ?>
 <?PHP include('inc/header.inc.php'); ?>
 
-        <div id="bd">
-            <div id="yui-main">
-                <div class="yui-b"><div class="yui-g">
+<div class="row">
+<div class="col-lg-12">
 
-                    <div class="block tabs spaces">
-                        <div class="hd">
-                            <h2>Applications</h2>
-							<ul>
-								<li class="active"><a href="application.php?id=<?PHP echo $app->id; ?>"><?PHP echo $app->name; ?></a></li>
-								<li><a href="versions.php?id=<?PHP echo $app->id; ?>">Versions</a></li>
-								<li><a href="version-new.php?id=<?PHP echo $app->id; ?>">Release New Version</a></li>
-							</ul>
-							<div class="clear"></div>
-                        </div>
-                        <div class="bd">
-							<?PHP echo $Error; ?>
-							<form action="application.php?id=<?PHP echo $app->id; ?>" method="post">
-								<h3>Basic Stuff</h3>
-                                <p>
-									<label for="name">Application Name</label>
-                                    <input type="text" class="text" name="name" id="name" value="<?PHP echo $name; ?>">
-                                </p>
-                                <p>
-									<label for="link">Info URL</label>
-                                    <input type="text" class="text" name="link" id="link" value="<?PHP echo $link; ?>">
-									<span class="info">Your application's product page</span>
-                                </p>
-                                <p>
-                                    <label for="url">Bundle Name</label>
-                                    <input type="text" class="text" name="bundle_name" id="bundle_name" value="<?PHP echo $bundle_name; ?>">
-                                    <span class="info">Ex: MyApplication.app</span>
-                                </p>
-                                <p>
-                                    <label for="url">i use this URL Key Slug</label>
-                                    <input type="text" class="text" name="i_use_this_key" id="i_use_this_key" value="<?PHP echo $i_use_this_key; ?>">
-                                    <span class="info">Ex: http://osx.iusethis.com/app/<strong>virtualhostx</strong></span>
-                                </p>
-                                <p>
-                                    <label for="url">Twitter keywords to search for</label>
-                                    <input type="text" class="text" name="tweet_terms" id="tweet_terms" value="<?PHP echo htmlspecialchars($tweet_terms); ?>">
-                                    <span class="info">Seperate with commas</span>
-                                </p>
-								<p>
-									<label for="upgrade_app_id">Upgrade App</label><br>
-                                    <select name="upgrade_app_id" id="upgrade_app_id">
+ <h1 class="page-header">Applications</h1>
+
+<ul class="nav nav-pills">
+<li class="active"><a href="application.php?id=<?PHP echo $app->id; ?>"><?PHP echo $app->name; ?></a></li>
+<li><a href="versions.php?id=<?PHP echo $app->id; ?>">Versions</a></li>
+<li><a href="version-new.php?id=<?PHP echo $app->id; ?>">Release New Version</a></li>
+</ul>
+
+
+<?PHP echo $Error; ?>
+
+
+</div>
+
+</div>
+
+<form action="application.php?id=<?PHP echo $app->id; ?>" method="post">
+
+<div class="row" style="margin-top: 20px;">
+<div class="col-lg-12">
+
+
+<div class="panel panel-default">
+<div class="panel-heading">
+Basic Stuff
+</div>
+
+<div class="panel-body">
+
+
+<div class="form-group">
+<label for="name">Application Name</label>
+<input type="text" name="name" id="name" value="<?PHP echo $name; ?>" class="form-control">
+</div>
+
+<div class="form-group">
+<label for="link">Info URL</label>
+<input type="text" name="link" id="link" value="<?PHP echo $link; ?>" class="form-control">
+<br>
+<div class="alert alert-info">
+<span class="info">Ex: Your application's product page</span>
+</div></div>
+
+
+<div class="form-group">
+<label for="url">Bundle Name</label>
+<input type="text" class="form-control" name="bundle_name" id="bundle_name" value="<?PHP echo $bundle_name; ?>">
+<br>
+<div class="alert alert-info">
+<span class="info">Ex: MyApplication.app</span>
+</div></div>
+
+<div class="form-group">
+<label for="url">i use this URL Key Slug</label>
+<input type="text" class="form-control" name="i_use_this_key" id="i_use_this_key" value="<?PHP echo $i_use_this_key; ?>">
+<br>
+<div class="alert alert-info">
+<span class="info">Ex: http://osx.iusethis.com/app/<strong>virtualhostx</strong></span>
+</div></div>
+
+
+<div class="form-group">
+<label for="url">Twitter keywords to search for</label>
+<input type="text" class="form-control" name="tweet_terms" id="tweet_terms" value="<?PHP echo htmlspecialchars($tweet_terms); ?>">
+<br>
+<div class="alert alert-info">
+<span class="info">Seperate with commas</span>
+</div>
+</div>
+
+
+<div class="form-group">
+<label for="upgrade_app_id">Upgrade App</label><br>
+                                    <select name="upgrade_app_id" id="upgrade_app_id" class="form-control">
 										<option value="">-- None --</option>
 										<?PHP foreach($upgrade_apps as $a) : ?>
 										<option <?PHP if($upgrade_app_id == $a->id) echo 'selected="selected"'; ?> value="<?PHP echo $a->id; ?>"><?PHP echo $a->name; ?></option>
 										<?PHP endforeach; ?>
 									</select><br/>
-									<span class="info">Choosing an app here will provide a one-click option to upgrade existing orders to the selected app.</span>
-                                </p>
+<div class="alert alert-info">
+<span class="info">Choosing an app here will provide a one-click option to upgrade existing orders to the selected app.</span>
+</div></div>
 
 
-								<hr>
-								
-								<h3>Amazon S3</h3>
-                                <p>
-									<label for="s3key">Amazon S3 Key</label>
-                                    <input type="text" class="text" name="s3key" id="s3key" value="<?PHP echo $s3key; ?>">
-                                </p>
-                                <p>
-									<label for="s3key">Amazon S3 Private Key</label>
-                                    <input type="text" class="text" name="s3pkey" id="s3pkey" value="<?PHP echo $s3pkey; ?>">
-                                </p>
-                                <p>
-									<label for="s3key">Amazon S3 Bucket Name</label>
-                                    <input type="text" class="text" name="s3bucket" id="s3bucket" value="<?PHP echo $s3bucket; ?>">
-                                </p>
-                                <p>
-									<label for="url">Amazon S3 Path</label>
-                                    <input type="text" class="text" name="s3path" id="s3path" value="<?PHP echo $s3path; ?>">
-									<span class="info">The directory in your bucket where you downloads will be stored</span>
-                                </p>
+</div>
+</div>
 
-								<hr>
 
-								<h3>Sparkle</h3>
-                                <p>
-									<label for="sparkle_key">Sparkle Public Key</label>
-                                    <textarea name="sparkle_key" id="sparkle_key" class="text"><?PHP echo $sparkle_key ?></textarea>
-                                </p>
-                                <p>
-									<label for="sparkle_pkey">Sparkle Private Key</label>
-                                    <textarea name="sparkle_pkey" id="sparkle_pkey" class="text"><?PHP echo $sparkle_pkey ?></textarea>
-                                </p>
 
-								<hr>
 
-								<h3>Licensing Engine</h3>
-								<p>
-									<label for="engine_class_name">License Engine Class Name</label><br>
-                                    <input type="text" class="text" name="engine_class_name" id="engine_class_name" value="<?PHP echo $engine_class_name; ?>">
-									<span class="info">The PHP class name of your licensing engine. Available engines are: <?PHP echo $available_engines; ?></span>
-                                </p>
+<div class="panel panel-default">
+<div class="panel-heading">
+File Storage
+</div>
 
-                                <p>
-									<label for="ap_key">Aquatic Prime Public Key</label>
-                                    <textarea name="ap_key" id="ap_key" class="text"><?PHP echo $ap_key ?></textarea>
-                                </p>
-                                <p>
-									<label for="ap_pkey">Aquatic Prime Private Key</label>
-                                    <textarea name="ap_pkey" id="ap_pkey" class="text"><?PHP echo $ap_pkey ?></textarea>
-                                </p>
+<div class="panel-body">
 
-								<p>
-									<label for="custom_salt">Custom License Salt (if not using Aquatic Prime)</label>
-                                    <textarea name="custom_salt" id="custom_salt" class="text"><?PHP echo $custom_salt ?></textarea>
-                                </p>
 
-								<hr>
-								
-                                <h3>PayPal</h3>
-                                <p>
-                                    <label for="return_url">PayPal Thanks URL</label>
-                                    <input type="text" class="text" name="return_url" value="<?PHP echo $return_url; ?>" id="return_url">
-                                </p>                                
+<div class="form-group">
+<label for="s3key">Amazon S3 Key</label>
+<input type="text" class="form-control" name="s3key" id="s3key" value="<?PHP echo $s3key; ?>">
+</div>
 
-                                <hr>
+<div class="form-group">
+<label for="s3key">Amazon S3 Private Key</label>
+<input type="text" class="form-control" name="s3pkey" id="s3pkey" value="<?PHP echo $s3pkey; ?>">
+</div>
 
-                                <h3>FastSpring</h3>
-                                <p>
-                                    <label for="return_url">Item Notification Security Key</label>
-                                    <input type="text" class="text" name="fs_security_key" value="<?PHP echo $fs_security_key; ?>" id="fs_security_key">
-                                </p>                                
 
-                                <hr>
-								
-								<h3>Thank-you Email</h3>
-								<p>
-									<label for="from_email">From Email</label>
-									<input type="text" class="text" name="from_email" value="<?PHP echo $from_email; ?>" id="from_email">
-								</p>
-								<p>
-									<label for="email_subject">Email Subject</label>
-									<input type="text" class="text" name="email_subject" value="<?PHP echo $email_subject; ?>" id="email_subject">
-								</p>
-                                <p>
-									<label for="email_body">Email Body</label>
-                                    <textarea name="email_body" id="email_body" class="text"><?PHP echo $email_body ?></textarea><br>
-									<span class="info"><strong>Available Substitutions</strong>: {first_name}, {last_name}, {payer_email}, {license}, {serial_number}, {1daylink}, {3daylink}, {1weeklink}, {foreverlink}. Add your own in includes/class.objects.php getBody().</span>
-                                </p>
+<div class="form-group">
+<label for="s3key">Amazon S3 Bucket Name</label>
+<input type="text" class="form-control" name="s3bucket" id="s3bucket" value="<?PHP echo $s3bucket; ?>">
+</div>
 
-								<p>
-									<label for="license_filename">License Filename</label>
-									<input type="text" class="text" name="license_filename" value="<?PHP echo $license_filename; ?>" id="license_filename">
-								</p>
 
-								<p><input type="submit" name="btnSaveApp" value="Save Application" id="btnSaveApp"></p>
-							</form>
-						</div>
-					</div>
-              
-                </div></div>
-            </div>
-            <div id="sidebar" class="yui-b">
-            </div>
-        </div>
+<div class="form-group">
+<label for="url">Amazon S3 Path</label>
+<input type="text" class="form-control" name="s3path" id="s3path" value="<?PHP echo $s3path; ?>">
+<br>
+<div class="alert alert-info">
+<span class="info">The directory in your bucket where you downloads will be stored</span>
+</div>
+</div>
+
+
+</div>
+</div>
+
+
+
+<div class="panel panel-default">
+<div class="panel-heading">
+Sparkle
+</div>
+
+<div class="panel-body">
+
+<div class="form-group">
+<label for="sparkle_key">Sparkle Public Key</label>
+<textarea name="sparkle_key" id="sparkle_key" class="form-control"><?PHP echo $sparkle_key ?></textarea>
+</div>
+
+<div class="form-group">
+<label for="sparkle_pkey">Sparkle Private Key</label>
+<textarea name="sparkle_pkey" id="sparkle_pkey" class="form-control"><?PHP echo $sparkle_pkey ?></textarea>
+</div>
+
+
+
+</div>
+</div>
+
+
+
+<div class="panel panel-default">
+<div class="panel-heading">
+Licensing Engine
+</div>
+
+<div class="panel-body">
+
+<div class="form-group">
+<label for="engine_class_name">License Engine Class Name</label><br>
+<input type="text" class="form-control" name="engine_class_name" id="engine_class_name" value="<?PHP echo $engine_class_name; ?>">
+<br>
+<div class="alert alert-info">
+<span class="info">The PHP class name of your licensing engine. Available engines are: <?PHP echo $available_engines; ?></span>
+</div>
+</div>
+
+<div class="form-group">
+<label for="ap_key">Aquatic Prime Public Key</label>
+<textarea name="ap_key" id="ap_key" class="form-control"><?PHP echo $ap_key ?></textarea>
+</div>
+
+<div class="form-group">
+<label for="ap_pkey">Aquatic Prime Private Key</label>
+<textarea name="ap_pkey" id="ap_pkey" class="form-control"><?PHP echo $ap_pkey ?></textarea>
+</div>
+
+<div class="form-group">
+<label for="custom_salt">Custom License Salt (if not using Aquatic Prime)</label>
+<textarea name="custom_salt" id="custom_salt" class="form-control"><?PHP echo $custom_salt ?></textarea>
+</div>
+
+</div>
+</div>
+
+
+
+<div class="panel panel-default">
+<div class="panel-heading">
+PayPal
+</div>
+
+<div class="panel-body">
+
+<div class="form-group">
+<label for="return_url">PayPal Thanks URL</label>
+<input type="text" class="form-control" name="return_url" value="<?PHP echo $return_url; ?>" id="return_url">
+</div>
+
+</div>
+</div>
+
+
+<div class="panel panel-default">
+<div class="panel-heading">
+FastSpring
+</div>
+
+<div class="panel-body">
+
+<div class="form-group">
+<label for="return_url">Item Notification Security Key</label>
+<input type="text" class="form-control" name="fs_security_key" value="<?PHP echo $fs_security_key; ?>" id="fs_security_key">
+</div>
+
+</div>
+</div>
+
+
+
+<div class="panel panel-default">
+<div class="panel-heading">
+Thank-you Email
+</div>
+
+<div class="panel-body">
+
+<div class="form-group">
+<label for="from_email">From Email</label>
+<input type="text" class="form-control" name="from_email" value="<?PHP echo $from_email; ?>" id="from_email">
+</div>
+
+<div class="form-group">
+<label for="email_subject">Email Subject</label>
+<input type="text" class="form-control" name="email_subject" value="<?PHP echo $email_subject; ?>" id="email_subject">
+</div>
+
+<div class="form-group">
+<label for="email_subject">Email Subject</label>
+<input type="text" class="form-control" name="email_subject" value="<?PHP echo $email_subject; ?>" id="email_subject">
+</div>
+
+<div class="form-group">
+<label for="email_body">Email Body</label>
+<textarea name="email_body" id="email_body" class="form-control"><?PHP echo $email_body ?></textarea><br>
+<div class="alert alert-info">
+<span class="info"><strong>Available Substitutions</strong>: {first_name}, {last_name}, {payer_email}, {license}, {serial_number}, {1daylink}, {3daylink}, {1weeklink}, {foreverlink}. Add your own in includes/class.objects.php getBody().</span>
+</div>
+</div>
+
+<div class="form-group">
+<label for="license_filename">License Filename</label>
+<input type="text" class="form-control" name="license_filename" value="<?PHP echo $license_filename; ?>" id="license_filename">
+</div>
+
+<input type="submit" name="btnSaveApp" value="Save Application" id="btnSaveApp" class="btn btn-lg btn-success btn-block">
+
+</div>
+</div>
+
+</form>
+
+
+</div>
+</div>
+
 
 <?PHP include('inc/footer.inc.php'); ?>

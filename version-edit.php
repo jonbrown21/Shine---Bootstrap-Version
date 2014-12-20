@@ -35,40 +35,57 @@
 ?>
 <?PHP include('inc/header.inc.php'); ?>
 
-        <div id="bd">
-            <div id="yui-main">
-                <div class="yui-b"><div class="yui-g">
 
-                    <div class="block tabs spaces">
-						<?PHP echo $Error; ?>
-                        <div class="hd">
-                            <h2>Applications</h2>
-							<ul>
-								<li><a href="application.php?id=<?PHP echo $app->id; ?>"><?PHP echo $app->name; ?></a></li>
-								<li class="active"><a href="versions.php?id=<?PHP echo $app->id; ?>">Versions</a></li>
-								<li><a href="version-new.php?id=<?PHP echo $app->id; ?>">Release New Version</a></li>
-							</ul>
-							<div class="clear"></div>
+<div class="row">
+<div class="col-lg-12">
+
+<h1 class="page-header">Applications</h1>
+
+<ul class="nav nav-pills">
+<li><a href="application.php?id=<?PHP echo $app->id; ?>"><?PHP echo $app->name; ?></a></li>
+<li class="active"><a href="versions.php?id=<?PHP echo $app->id; ?>">Versions</a></li>
+<li><a href="version-new.php?id=<?PHP echo $app->id; ?>">Release New Version</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<br><br>
+
+<div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Create Manual Order
                         </div>
-                        <div class="bd">
-							<form action="version-edit.php?id=<?PHP echo $v->id; ?>" method="post">
-								<p><label for="version_number">Version Number</label> <input type="text" name="version_number" id="version_number" value="<?PHP echo $version_number;?>" class="text"></p>
-								<p><label for="human_version">Human Readable Version Number</label> <input type="text" name="human_version" id="human_version" value="<?PHP echo $human_version;?>" class="text"></p>
-								<p><label for="url">Download URL</label> <input type="text" name="url" id="url" value="<?PHP echo $url;?>" class="text"></p>
-								<p><label for="release_notes">Release Notes</label> <textarea class="text" name="release_notes" id="release_notes"><?PHP echo $release_notes; ?></textarea></p>
-								<p><label for="filesize">Filesize</label> <input type="text" name="filesize" id="filesize" value="<?PHP echo $filesize; ?>" class="text"></p>
-								<p><label for="signature">Sparkle Signature</label> <input type="text" name="signature" id="signature" value="<?PHP echo $signature; ?>" class="text"></p>
-								<p><input type="submit" name="btnDelete" value="Delete Version" id="btnDelete" onclick="return confirm('Are you sure?');"></p>
-								<p><input type="submit" name="btnSave" value="Save" id="btnSave"></p>
+                        <div class="panel-body">
+                            <div class="row">
+  
+                                <div class="col-lg-12">
+                                    
+                                    <form action="version-edit.php?id=<?PHP echo $v->id; ?>" method="post">
+								<p><label for="version_number">Version Number</label> <input type="text" name="version_number" id="version_number" value="<?PHP echo $version_number;?>" class="form-control"></p>
+								<p><label for="human_version">Human Readable Version Number</label> <input type="text" name="human_version" id="human_version" value="<?PHP echo $human_version;?>" class="form-control"></p>
+								<p><label for="url">Download URL</label> <input type="text" name="url" id="url" value="<?PHP echo $url;?>" class="form-control"></p>
+								<p><label for="release_notes">Release Notes</label> <textarea class="form-control" name="release_notes" id="release_notes"><?PHP echo $release_notes; ?></textarea></p>
+								<p><label for="filesize">Filesize</label> <input type="text" name="filesize" id="filesize" value="<?PHP echo $filesize; ?>" class="form-control"></p>
+								<p><label for="signature">Sparkle Signature</label> <input type="text" name="signature" id="signature" value="<?PHP echo $signature; ?>" class="form-control"></p>
+<br>
+								<p><input type="submit" name="btnDelete" value="Delete Version" id="btnDelete" onclick="return confirm('Are you sure?');" class="btn btn-lg btn-danger">   <input type="submit" name="btnSave" value="Save" id="btnSave" class="btn btn-lg btn-success"></p>
 							</form>
-						</div>
-					</div>
-              
-                </div></div>
+                                </div>
+                                <!-- /.col-lg-6 (nested) -->
+                            </div>
+                            <!-- /.row (nested) -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
             </div>
-            <div id="sidebar" class="yui-b">
+            <!-- /.row -->
 
-            </div>
-        </div>
 
 <?PHP include('inc/footer.inc.php'); ?>

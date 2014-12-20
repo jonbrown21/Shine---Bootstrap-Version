@@ -36,35 +36,60 @@
 ?>
 <?PHP include('inc/header.inc.php'); ?>
 
-        <div id="bd">
-            <div id="yui-main">
-                <div class="yui-b"><div class="yui-g">
-					<?PHP echo $Error; ?>
-                    <div class="block">
-                        <div class="hd">
-                            <h2>Create new user</h2>
+<div class="row">
+<div class="col-lg-12">
+
+ <h1 class="page-header">Users</h1>
+
+<ul class="nav nav-pills">
+<li><a href="users.php">Users</a></li>
+<li class="active"><a href="user-new.php">Create new user</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<br><br>
+
+
+  <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Create User
                         </div>
-                        <div class="bd">
-							<form action="user-new.php" method="post">
-								<p><label for="username">Username</label> <input type="text" name="username" id="username" value="<?PHP echo $username; ?>" class="text"></p>
-								<p><label for="password">Password</label> <input type="password" name="password" id="password" value="" class="text"></p>
-								<p><label for="email">Email</label> <input type="text" name="email" id="email" value="<?PHP echo $email; ?>" class="text"></p>
+                        <div class="panel-body">
+                            <div class="row">
+  
+                                <div class="col-lg-12">
+                                    
+                                   <form action="user-new.php" method="post">
+								<p><label for="username">Username</label> <input type="text" name="username" id="username" value="<?PHP echo $username; ?>" class="form-control"></p>
+								<p><label for="password">Password</label> <input type="password" name="password" id="password" value="" class="form-control"></p>
+								<p><label for="email">Email</label> <input type="text" name="email" id="email" value="<?PHP echo $email; ?>" class="form-control"></p>
 								<p><label for="level">Level</label>
-								    <select name="level" id="level">
+								    <select name="level" id="level" class="form-control">
                                         <option <?PHP if($level == 'user') echo 'selected="selected"'; ?> value="user">User</option>
                                         <option <?PHP if($level == 'admin') echo 'selected="selected"'; ?> value="admin">Admin</option>
                                     </select>
-                                </p>
-								<p><input type="submit" name="btnCreateAccount" value="Create Account" id="btnCreateAccount"></p>
+                                </p><br>
+								<p><input type="submit" name="btnCreateAccount" value="Create Account" id="btnCreateAccount" class="btn btn-lg btn-success btn-block"></p>
+								
 							</form>
-						</div>
-					</div>
-              
-                </div></div>
+                                </div>
+                                <!-- /.col-lg-6 (nested) -->
+                            </div>
+                            <!-- /.row (nested) -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
             </div>
-            <div id="sidebar" class="yui-b">
+            <!-- /.row -->
 
-            </div>
-        </div>
+
 
 <?PHP include('inc/footer.inc.php'); ?>

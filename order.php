@@ -47,65 +47,100 @@
 ?>
 <?PHP include('inc/header.inc.php'); ?>
 
-        <div id="bd">
-            <div id="yui-main">
-                <div class="yui-b"><div class="yui-g">
+<div class="row">
+<div class="col-lg-12">
 
-                    <div class="block">
-                        <div class="hd">
-                            <h2>
-								Order #<?PHP echo $o->id; ?>
-								<?PHP if($o->deactivated == 1) : ?> (Deactivated) <?PHP endif; ?>
-							</h2>
+ <h1 class="page-header">Order #<?PHP echo $o->id; ?><?PHP if($o->deactivated == 1) : ?> (Deactivated) <?PHP endif; ?></h1>
+
+</div>
+
+</div>
+
+
+<div class="row">
+
+
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Order #<?PHP echo $o->id; ?><?PHP if($o->deactivated == 1) : ?> (Deactivated) <?PHP endif; ?>
                         </div>
-                        <div class="bd">
-							<table class="lines">
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+
 								<?PHP foreach($o->columns as $k => $v) : ?>
 								<?PHP if(strlen(trim($v)) > 0) : ?>
-								<tr>
-									<th><strong><?PHP echo $k; ?></strong></th>
-									<td><?PHP echo $v; ?></td>
-								</tr>
+                                        <tr>
+										<th><strong><?PHP echo $k; ?></strong></th>
+										<td><?PHP echo $v; ?></td>
+                                        </tr>
 								<?PHP endif; ?>
 								<?PHP endforeach; ?>
-							</table>
-						</div>
-					</div>
+                                </table>
+                            </div>
+           <!-- /.table-responsive -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+</div></div>
 
-					<div class="block">
-						<div class="hd">
-							<h2>Order Notes</h2>
-						</div>
-						<div class="bd">
-							<form action="order.php?id=<?PHP echo $o->id; ?>" method="post" class="bd">
-								<textarea style="width:100%;" name="notes" id="notes"><?PHP echo $o->notes; ?></textarea>
-								<input type="submit" name="btnNotes" value="Save Notes" id="btnNotes">
-								<span class="info">Notes will NOT be sent or made visible to customers.</span>
-							</form>
-						</div>
-					</div>              
+<div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Order Notes
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <form action="order.php?id=<?PHP echo $o->id; ?>" method="post" class="bd">
+								<textarea style="width:100%;" name="notes" id="notes" class="form-control"><?PHP echo $o->notes; ?></textarea>
+<br>
+								<input type="submit" name="btnNotes" value="Save Notes" id="btnNotes" class="btn btn-lg btn-success btn-block">
+<br>
+								<div class="alert alert-info"><span class="info">Notes will NOT be sent or made visible to customers.</span></div>
+							
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+</div>	
+</div>
+       
+<div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Customer Info
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div id="rapportive" class="bd"></div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+</div>	
+</div>
+       
 
-                </div></div>
-            </div>
-            <div id="sidebar" class="yui-b">
-				<div class="block">
-					<div class="hd">
-						<h3>Customer Info</h3>
-					</div>
-					<div id="rapportive" class="bd"></div>
-				</div>
 
-				<div class="block">
-					<div class="hd">
-						<h3>Related Orders and Activations</h3>
-					</div>
-					<div class="bd">
-						<p><a href="activations.php?q=<?PHP echo $o->payer_email; ?>">Activated <?PHP echo $o->activationCount(); ?> times</a></p>
-					    <table class="lines">
+<div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Related Orders and Activations
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <p><a href="activations.php?q=<?PHP echo $o->payer_email; ?>">Activated <?PHP echo $o->activationCount(); ?> times</a></p>
+					    <table class="table table-striped">
 					        <thead>
 					            <tr>
-					                <td>Date</td>
-					                <td>App Name</td>
+					                <th>Date</th>
+					                <th>App Name</th>
 					            </tr>
 					        </thead>
 					        <tbody>
@@ -117,15 +152,24 @@
     							<?PHP endforeach; ?>
 					        </tbody>
 					    </table>
-					</div>
-				</div>
-
-                <div class="block">
-                    <div class="hd">
-                        <h3>License Options</h3>
+                        </div>
+                        <!-- /.panel-body -->
                     </div>
-                    <div class="bd">
-						<ul class="biglist">
+                    <!-- /.panel -->
+</div>	
+</div>
+
+
+
+<div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            License Options
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <ul class="biglist">
 							<li><a href="order.php?id=<?PHP echo $o->id; ?>&amp;act=email" id="email">Email to User</a></li>
 							<li><a href="<?PHP echo $o->getDownloadLink(); ?>">Download Link (does not expire)</a></li>
 							<li><a href="<?PHP echo $o->getDownloadLink(86400); ?>">Download Link (1 day)</a></li>
@@ -133,41 +177,62 @@
 							<li><a href="<?PHP echo $o->getDownloadLink(86400 * 7); ?>">Download Link (1 week)</a></li>
 							<li><a href="order.php?id=<?PHP echo $o->id; ?>&amp;act=deactivate" id="deactivate">Deactivate License</a></li>
 						</ul>
-					</div>
-				</div>
-				
-				<div class="block">
-					<div class="hd">
-						<h3>Order Options</h3>
-					</div>
-					<div class="bd">
-						<ul class="biglist">
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+</div>	
+</div>
+
+
+
+
+<div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Order Options
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <ul class="biglist">
 							<?PHP if($app->upgrade_app_id > 0) : ?>
 							<li><a href="order.php?id=<?PHP echo $o->id; ?>&amp;act=upgrade" id="upgrade">Upgrade Order</a></li>
 							<?PHP endif; ?>
 							<li><a href="order.php?id=<?PHP echo $o->id; ?>&amp;act=delete" id="delete">Delete Order</a></li>
 						</ul>
-					</div>
-				</div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+</div>	
+</div>
 
-				<div class="block">
-					<div class="hd">
-						<h3>Cut &amp; Paste License</h3>
-					</div>
-					<div class="bd">
-						<?PHP if($app->engine_class_name == 'aquaticprime') : ?>
-						<textarea style="width:100%;"><?PHP echo $o->license; ?></textarea>
+<div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Cut &amp; Paste License
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <?PHP if($app->engine_class_name == 'aquaticprime') : ?>
+						<textarea style="width:100%;" class="form-control"><?PHP echo $o->license; ?></textarea>
 						<?PHP elseif($app->engine_class_name == 'dual') : ?>
-						<textarea style="width:100%;"><?PHP echo "Email: {$o->payer_email}\nSerial Number: {$o->serial_number}"; ?></textarea>
+						<textarea style="width:100%;" class="form-control"><?PHP echo "Email: {$o->payer_email}\nSerial Number: {$o->serial_number}"; ?></textarea>
 						<?PHP else : ?>
-						<textarea style="width:100%;"><?PHP echo "Email: {$o->payer_email}\nReg Key: {$o->license}"; ?></textarea>
+						<textarea style="width:100%;" class="form-control"><?PHP echo "Email: {$o->payer_email}\nReg Key: {$o->license}"; ?></textarea>
 						<?PHP endif; ?>
-					</div>
-				</div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+</div>	
+</div>
 
-				
-            </div>
-        </div>
+
+
+
 
 <?PHP include('inc/footer.inc.php'); ?>
 <script type="text/javascript" charset="utf-8">

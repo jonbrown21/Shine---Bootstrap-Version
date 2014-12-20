@@ -47,27 +47,41 @@
 	$activations = DBObject::glob('Activation', "SELECT * FROM shine_activations WHERE (order_id IN ($order_ids)) OR (ip = '{$f->ip}') ORDER BY dt DESC");
 ?>
 <?PHP include('inc/header.inc.php'); ?>
+<div class="row">
+<div class="col-lg-12">
 
-        <div id="bd">
-            <div id="yui-main">
-                <div class="yui-b"><div class="yui-g">
+ <h1 class="page-header">Orders</h1>
 
-                    <div class="block tabs spaces">
-                        <div class="hd">
-                            <h2>Orders</h2>
-							<ul>
+<ul class="nav nav-pills">
 								<li><a href="feedback.php">All Feedback</a></li>
 								<li><a href="feedback.php?type=support">Support Questions</a></li>
 								<li><a href="feedback.php?type=bug">Bug Reports</a></li>
 								<li><a href="feedback.php?type=feature">Feature Requests</a></li>
 								<li class="active"><a href="feedback-view.php?id=<?PHP echo $f->id; ?>">Feedback #<?PHP echo $f->id; ?></a></li>
-							</ul>
-							<div class="clear"></div>
-                        </div>
-                        <div class="bd">
+</ul>
 
-							<table class="lines">
-								<tr>
+
+<?PHP echo $Error; ?>
+
+
+</div>
+
+</div>
+
+<br>
+
+
+<div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Feedback #<?PHP echo $f->id; ?>
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <tr>
 									<th>App Name</th>
 									<td><?PHP echo $f->appname . ' ' . $f->appversion;?></td>
 								</tr>
@@ -107,52 +121,81 @@
 									<th>IP</th>
 									<td><?PHP echo $f->ip;?></td>
 								</tr>
-							</table>
+                                </table>
+
 
 							<form action="feedback-view.php?id=<?PHP echo $f->id;?>" method="post">
 								<p>
-									<input type="submit" name="btnNew" value="Mark as New" id="btnnew"/>
-									<input type="submit" name="btnDelete" value="Delete" id="btndelete" onclick="return confirm('Are you sure?');"/>
+									<input type="submit" name="btnNew" value="Mark as New" id="btnnew"/ class="btn btn-lg btn-info">
+									<input type="submit" name="btnDelete" value="Delete" id="btndelete" onclick="return confirm('Are you sure?');"/ class="btn btn-lg btn-danger">
 								</p>
 							</form>
-						</div>
-					</div>
 
-                    <div class="block">
-                        <div class="hd">
-                            <h2>Feedback Notes</h2>
-						</div>
-						<div clcass="bd">
-							<form action="feedback-view.php?id=<?PHP echo $f->id; ?>" method="post" class="bd">
-								<textarea style="width:100%;" name="notes" id="notes"><?PHP echo $f->notes; ?></textarea>
-								<input type="submit" name="btnNotes" value="Save Notes" id="btnNotes">
-								<span class="info">Notes will NOT be sent or made visible to customers.</span>
+
+                            </div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+
+                    <!-- /.panel -->
+                </div>
+</div>
+
+
+<div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Feedback Notes
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <form action="feedback-view.php?id=<?PHP echo $f->id; ?>" method="post" class="bd">
+								<textarea style="width:100%;" name="notes" id="notes" class="form-control"><?PHP echo $f->notes; ?></textarea><br>
+								<input type="submit" name="btnNotes" value="Save Notes" id="btnNotes" class="btn btn-lg btn-success"><br><br>
+								<div class="alert alert-info"><span class="info">Notes will NOT be sent or made visible to customers.</span></div>
 							</form>
-						</div>
-					</div>
-
-                </div></div>
-            </div>
-            <div id="sidebar" class="yui-b">
-				<div class="block">
-					<div class="hd">
-						<h3>Customer Info</h3>
-					</div>
-					<div id="rapportive" class="bd"></div>
-				</div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+</div>	
+</div>
 
 
-  				<div class="block">
-  					<div class="hd">
- 						<h2>Related Feedback</h2>
- 					</div>
- 					<div class="bd">
- 					    <table>
- 					        <thead>
+<div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Customer Info
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div id="rapportive" class="bd"></div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+</div>	
+</div>
+
+
+
+<div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Related Feedback
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
  					            <tr>
- 					                <td>Date</td>
- 					                <td>App Name</td>
- 					                <td>Type</td>
+ 					                <th>Date</th>
+ 					                <th>App Name</th>
+ 					                <th>Type</th>
  					            </tr>
  					        </thead>
  					        <tbody>
@@ -164,21 +207,32 @@
      							</tr>
      							<?PHP endforeach; ?>
  					        </tbody>
- 					    </table>
- 					</div>
- 				</div>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
 
-				<div class="block">
-					<div class="hd">
-						<h2>Related Orders</h2>
-					</div>
-					<div class="bd">
-					    <table>
-					        <thead>
+                    <!-- /.panel -->
+                </div>
+</div>
+
+
+<div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Related Orders
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
 					            <tr>
-					                <td>Date</td>
-					                <td>Name</td>
-					                <td>App Name</td>
+					                <th>Date</th>
+					                <th>Name</th>
+					                <th>App Name</th>
 					            </tr>
 					        </thead>
 					        <tbody>
@@ -190,21 +244,31 @@
     							</tr>
     							<?PHP endforeach; ?>
 					        </tbody>
-					    </table>
-					</div>
-				</div>							
+                                </table>
+                            </div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
 
-				<div class="block">
-					<div class="hd">
-						<h2>Related Activations</h2>
-					</div>
-					<div class="bd">
-					    <table>
-					        <thead>
+                    <!-- /.panel -->
+                </div>
+</div>
+
+<div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Related Activations
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
 					            <tr>
-					                <td>Date</td>
-					                <td>App Name</td>
-					                <td>IP</td>
+					                <th>Date</th>
+					                <th>App Name</th>
+					                <th>IP</th>
 					            </tr>
 					        </thead>
 					        <tbody>
@@ -216,14 +280,18 @@
     							</tr>
     							<?PHP endforeach; ?>
 					        </tbody>
-					    </table>
-					</div>
-				</div>							
+                                </table>
+                            </div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+
+                    <!-- /.panel -->
+                </div>
+</div>
+										
 
 				
-            </div>
-        </div>
-
 <?PHP include('inc/footer.inc.php'); ?>
 <script type="text/javascript" charset="utf-8">
 	$(function() {

@@ -40,8 +40,8 @@
 	$available_apps = $db->getValues("SELECT app_id FROM shine_orders GROUP BY app_id");
 
 	// Orders Per Month
-	$order_totals    = $db->getRows("SELECT DATE_FORMAT(dt, '%b') as dtstr, COUNT(*) FROM shine_orders WHERE type = 'PayPal' $where GROUP BY CONCAT(YEAR(dt), '-', MONTH(dt)) ORDER BY YEAR(dt) ASC, MONTH(dt) ASC");
-	$opm             = new googleChart(implode(',', gimme($order_totals, 'COUNT(*)')), 'bary');
+	$order_totals_month    = $db->getRows("SELECT DATE_FORMAT(dt, '%b') as dtstr, COUNT(*) FROM shine_orders WHERE type = 'PayPal' $where GROUP BY CONCAT(YEAR(dt), '-', MONTH(dt)) ORDER BY YEAR(dt) ASC, MONTH(dt) ASC");
+	$opm             = new googleChart(implode(',', gimme($order_totals_month, 'COUNT(*)')), 'bary');
 	$opm->showGrid   = 1;
 	$opm->dimensions = '280x100';
 	$opm->setLabelsMinMax(4,'left');
@@ -49,8 +49,8 @@
 	$opm_fb->dimensions = '640x400';
 
 	// Orders Per Week
-	$order_totals    = $db->getRows("SELECT WEEK(dt) as dtstr, COUNT(*) FROM shine_orders WHERE type = 'PayPal' $where GROUP BY CONCAT(YEAR(dt), WEEK(dt)) ORDER BY YEAR(dt) ASC, WEEK(dt) ASC");
-	$opw             = new googleChart(implode(',', gimme($order_totals, 'COUNT(*)')), 'bary');
+	$order_totals_week    = $db->getRows("SELECT WEEK(dt) as dtstr, COUNT(*) FROM shine_orders WHERE type = 'PayPal' $where GROUP BY CONCAT(YEAR(dt), WEEK(dt)) ORDER BY YEAR(dt) ASC, WEEK(dt) ASC");
+	$opw             = new googleChart(implode(',', gimme($order_totals_week, 'COUNT(*)')), 'bary');
 	$opw->showGrid   = 1;
 	$opw->dimensions = '280x100';
 	$opw->setLabelsMinMax(4,'left');
@@ -71,121 +71,194 @@
 ?>
 <?PHP include('inc/header.inc.php'); ?>
 
-        <div id="bd">
-            <div id="yui-main">
-                <div class="yui-b"><div class="yui-g">
+
+<div class="row">
+<div class="col-lg-12">
+
+ <h1 class="page-header">Orders</h1>
+
+<ul class="nav nav-pills">
+<li class="<?PHP if(!isset($_GET['id'])) echo 'active'; ?>"><a href="orders.php">All Orders</a></li>
+<?PHP foreach($applications as $a) : if(!in_array($a->id, $available_apps)) continue; ?>
+<li class="<?PHP if(@$_GET['id'] == $a->id) echo 'active'; ?>"><a href="orders.php?id=<?PHP echo $a->id; ?>"><?PHP echo $a->name; ?></a></li>
+<?PHP endforeach; ?>
+</ul>
+
+</div>
+
+</div>
+
+<br><br>
 
 
-                    <div class="block tabs spaces">
-                        <div class="hd">
-                            <h2>Orders</h2>
-							<ul>
-								<li class="<?PHP if(!isset($_GET['id'])) echo 'active'; ?>"><a href="orders.php">All Orders</a></li>
-								<?PHP foreach($applications as $a) : if(!in_array($a->id, $available_apps)) continue; ?>
-								<li class="<?PHP if(@$_GET['id'] == $a->id) echo 'active'; ?>"><a href="orders.php?id=<?PHP echo $a->id; ?>"><?PHP echo $a->name; ?></a></li>
-								<?PHP endforeach; ?>
-							</ul>
-							<div class="clear"></div>
+
+<div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Your Applications
                         </div>
-                        <div class="bd">
-	                        <ul class="pager">
-                                <li><a href="orders.php?page=<?PHP echo $pager->prevPage(); ?>&amp;id=<?PHP echo @$app_id; ?>">&#171; Prev</a></li>
-								<?PHP for($i = 1; $i <= $pager->numPages; $i++) : ?>
-								<?PHP if($i == $pager->page) : ?>
-                                <li class="active"><a href="orders.php?page=<?PHP echo $i; ?>&amp;id=<?PHP echo @$app_id; ?>"><?PHP echo $i; ?></a></li>
-								<?PHP else : ?>
-                                <li><a href="orders.php?page=<?PHP echo $i; ?>&amp;id=<?PHP echo @$app_id; ?>"><?PHP echo $i; ?></a></li>
-								<?PHP endif; ?>
-								<?PHP endfor; ?>
-                                <li><a href="orders.php?page=<?PHP echo $pager->nextPage(); ?>&amp;id=<?PHP echo @$app_id; ?>">Next &#187;</a></li>
-                            </ul>
-							<div class="clear"></div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+										<th>Application</th>
+										<th>Buyer</th>
+										<th>Email</th>
+										<th>Type</th>
+										<th>Order Date</th>
+										<th>Amount</th>
+										<th>Edit</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
 
-                            <table class="lines">
-                                <thead>
-                                    <tr>
-										<td>Application</td>
-										<td>Buyer</td>
-										<td>Email</td>
-										<td>Type</td>
-										<td>Order Date</td>
-										<td>Amount</td>
-										<td>&nbsp;</td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-									<?PHP foreach($orders as $o) : ?>
-									<tr class="<?PHP if($o->type == 'Manual') echo 'dim'; ?>">
+<?PHP foreach($orders as $o) : ?>
+
+                                        <tr>
 										<td><?PHP echo $o->applicationName(); ?></td>
 										<td><?PHP echo $o->first_name; ?> <?PHP echo $o->last_name; ?></td>
 										<td><a href="mailto:<?PHP echo utf8_encode($o->payer_email); ?>"><?PHP echo utf8_encode($o->payer_email); ?></a></td>
 										<td><?PHP echo $o->type; ?></td>
 										<td><?PHP echo dater($o->dt, 'm/d/Y g:ia') ?></td>
 										<td><?PHP echo $o->intlAmount(); ?></td>
-										<td><a href="order.php?id=<?PHP echo $o->id; ?>">View</a></td>
-									</tr>
-									<?PHP endforeach; ?>
-                                </tbody>
-                            </table>
+										<td><a href="order.php?id=<?PHP echo $o->id; ?>" class="btn btn-sm btn-success">Edit</a></td>
+                                        </tr>
+<?PHP endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                
+<hr>            <!-- /.table-responsive -->
+<div class="text-center">
+<ul class="pagination">
+<li><a href="orders.php?page=<?PHP echo $pager->prevPage(); ?>&amp;id=<?PHP echo @$app_id; ?>">&#171; Prev</a></li>
+<?PHP for($i = 1; $i <= $pager->numPages; $i++) : ?>
+<?PHP if($i == $pager->page) : ?>
+<li class="active"><a href="orders.php?page=<?PHP echo $i; ?>&amp;id=<?PHP echo @$app_id; ?>"><?PHP echo $i; ?></a></li>
+<?PHP else : ?>
+<li><a href="orders.php?page=<?PHP echo $i; ?>&amp;id=<?PHP echo @$app_id; ?>"><?PHP echo $i; ?></a></li>
+<?PHP endif; ?>
+<?PHP endfor; ?>
+<li><a href="orders.php?page=<?PHP echo $pager->nextPage(); ?>&amp;id=<?PHP echo @$app_id; ?>">Next &#187;</a></li>
+</ul>
+</div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
 
-	                        <ul class="pager">
-                                <li><a href="orders.php?page=<?PHP echo $pager->prevPage(); ?>&amp;id=<?PHP echo @$app_id; ?>">&#171; Prev</a></li>
-								<?PHP for($i = 1; $i <= $pager->numPages; $i++) : ?>
-								<?PHP if($i == $pager->page) : ?>
-                                <li class="active"><a href="orders.php?page=<?PHP echo $i; ?>&amp;id=<?PHP echo @$app_id; ?>"><?PHP echo $i; ?></a></li>
-								<?PHP else : ?>
-                                <li><a href="orders.php?page=<?PHP echo $i; ?>&amp;id=<?PHP echo @$app_id; ?>"><?PHP echo $i; ?></a></li>
-								<?PHP endif; ?>
-								<?PHP endfor; ?>
-                                <li><a href="orders.php?page=<?PHP echo $pager->nextPage(); ?>&amp;id=<?PHP echo @$app_id; ?>">Next &#187;</a></li>
-                            </ul>
-							<div class="clear"></div>
-						</div>
-					</div>
-              
-                </div></div>
-            </div>
-            <div id="sidebar" class="yui-b">
-				<div class="block">
-					<div class="hd">
-						Search Orders
-					</div>
-					<div class="bd">
-						<form action="orders.php?id=<?PHP echo @$app_id; ?>" method="get">
-							<p><input type="text" name="q" value="<?PHP echo @$q; ?>" id="q" class="text">
-							<span class="info">Searches Buyer's Name and Email address.</span></p>
-							<p><input type="submit" name="btnSearch" value="Search" id="btnSearch"> | <a href="order-new.php">Create Manual Order</a></p>
-						</form>
-					</div>
-				</div>
 
-				<div class="block">
-					<div class="hd">
-						<h2>Orders Per Month (<?PHP echo $app_name; ?>)</h2>
-					</div>
-					<div class="bd">
-						<a href="<?PHP echo $opm_fb->draw(false); ?>" class="fb"><?PHP $opm->draw(); ?></a>
-					</div>
-				</div>
 
-				<div class="block">
-					<div class="hd">
-						<h2>Orders Per Week (<?PHP echo $app_name; ?>)</h2>
-					</div>
-					<div class="bd">
-						<a href="<?PHP echo $opw_fb->draw(false); ?>" class="fb"><?PHP $opw->draw(); ?></a>
-					</div>
-				</div>
+<div class="row">
+<div class="col-lg-12">
+<div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-bar-chart-o fa-fw"></i> Weekly Orders
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                             <div class="row">
+                                <div style="margin: 20px;">
 
-				<div class="block">
-					<div class="hd">
-						<h2>Orders Per Month (All)</h2>
-					</div>
-					<div class="bd">
-						<a href="<?PHP echo $opma_fb->draw(false); ?>" class="fb"><?PHP $opma->draw(); ?></a>
-					</div>
-				</div>
-            </div>
-        </div>
+			<canvas id="canvas5"></canvas>
+
+                                </div>
+                                <!-- /.col-lg-8 (nested) -->
+                            </div>
+                    
+
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                    
+
+
+</div>
+
+
+
+<div class="col-lg-6">
+                   <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-bar-chart-o fa-fw"></i> Monthly Orders
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="row">
+                                <div style="margin: 20px;">
+
+			<canvas id="canvas6"></canvas>
+
+                                </div>
+                                <!-- /.col-lg-8 (nested) -->
+                            </div>
+                    
+
+
+</div>
+
+</div>
+
+
+       
 
 <?PHP include('inc/footer.inc.php'); ?>
+<script>
+	var options = {
+        scaleFontColor: "#fa0",
+        datasetStrokeWidth: 1,
+        scaleShowLabels : false,
+        animation : false,
+        bezierCurve : true,
+        scaleStartValue: 0,
+		showXLabels: 1,
+    };
+
+
+var barChartData5 = {
+		labels : [<?PHP print_r(implode(',', gimme($order_totals_week, 'COUNT(*)'))); ?>],
+		datasets : [
+			{
+				fillColor : "rgba(220,220,220,0.5)",
+				strokeColor : "rgba(220,220,220,0.8)",
+				highlightFill: "rgba(220,220,220,0.75)",
+				highlightStroke: "rgba(220,220,220,1)",
+				data : [<?PHP print_r(implode(',', gimme($order_totals_week, 'COUNT(*)'))); ?>]
+			}
+		]
+
+	}
+
+	var barChartData6 = {
+		labels : [<?PHP print_r(implode(',', gimme($order_totals_month, 'COUNT(*)'))); ?>],
+		datasets : [
+			{
+				fillColor : "rgba(220,220,220,0.5)",
+				strokeColor : "rgba(220,220,220,0.8)",
+				highlightFill: "rgba(220,220,220,0.75)",
+				highlightStroke: "rgba(220,220,220,1)",
+				data : [<?PHP print_r(implode(',', gimme($order_totals_month, 'COUNT(*)'))); ?>]
+			}
+		]
+
+	}
+
+window.onload = function(){
+		var ctx5 = document.getElementById("canvas5").getContext("2d");
+		window.myBar5 = new Chart(ctx5).Bar(barChartData5, {
+			responsive : true
+		});
+
+var ctx6 = document.getElementById("canvas6").getContext("2d");
+		window.myBar6 = new Chart(ctx6).Bar(barChartData6, {
+			responsive : true
+		});
+	}
+
+</script>
