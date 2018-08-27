@@ -113,9 +113,9 @@
  <h1 class="page-header">Applications</h1>
 
 <ul class="nav nav-pills">
-<li class="active"><a href="application.php?id=<?PHP echo $app->id; ?>"><?PHP echo $app->name; ?></a></li>
-<li><a href="versions.php?id=<?PHP echo $app->id; ?>">Versions</a></li>
-<li><a href="version-new.php?id=<?PHP echo $app->id; ?>">Release New Version</a></li>
+    <li class="nav-link"><a class="nav-link active" href="application.php?id=<?PHP echo $app->id; ?>"><?PHP echo $app->name; ?></a></li>
+    <li class="nav-link"><a class="nav-link" href="versions.php?id=<?PHP echo $app->id; ?>">Versions</a></li>
+    <li class="nav-link"><a class="nav-link" href="version-new.php?id=<?PHP echo $app->id; ?>">Release New Version</a></li>
 </ul>
 
 
@@ -132,12 +132,12 @@
 <div class="col-lg-12">
 
 
-<div class="panel panel-default">
-<div class="panel-heading">
+<div class="card">
+<div class="card-header">
 Basic Stuff
 </div>
 
-<div class="panel-body">
+<div class="card-body">
 
 
 <div class="form-group">
@@ -200,12 +200,12 @@ Basic Stuff
 
 
 
-<div class="panel panel-default">
-<div class="panel-heading">
+<div class="card">
+<div class="card-header">
 File Storage
 </div>
 
-<div class="panel-body">
+<div class="card-body">
 
 
 <div class="form-group">
@@ -240,12 +240,12 @@ File Storage
 
 
 
-<div class="panel panel-default">
-<div class="panel-heading">
+<div class="card">
+<div class="card-header">
 Sparkle
 </div>
 
-<div class="panel-body">
+<div class="card-body">
 
 <div class="form-group">
 <label for="sparkle_key">Sparkle Public Key</label>
@@ -264,12 +264,12 @@ Sparkle
 
 
 
-<div class="panel panel-default">
-<div class="panel-heading">
+<div class="card">
+<div class="card-header">
 Licensing Engine
 </div>
 
-<div class="panel-body">
+<div class="card-body">
 
 <div class="form-group">
 <label for="engine_class_name">License Engine Class Name</label><br>
@@ -300,12 +300,12 @@ Licensing Engine
 
 
 
-<div class="panel panel-default">
-<div class="panel-heading">
+<div class="card">
+<div class="card-header">
 PayPal
 </div>
 
-<div class="panel-body">
+<div class="card-body">
 
 <div class="form-group">
 <label for="return_url">PayPal Thanks URL</label>
@@ -316,12 +316,12 @@ PayPal
 </div>
 
 
-<div class="panel panel-default">
-<div class="panel-heading">
+<div class="card">
+<div class="card-header">
 FastSpring
 </div>
 
-<div class="panel-body">
+<div class="card-body">
 
 <div class="form-group">
 <label for="return_url">Item Notification Security Key</label>
@@ -333,12 +333,12 @@ FastSpring
 
 
 
-<div class="panel panel-default">
-<div class="panel-heading">
+<div class="card">
+<div class="card-header">
 Thank-you Email
 </div>
 
-<div class="panel-body">
+<div class="card-body">
 
 <div class="form-group">
 <label for="from_email">From Email</label>

@@ -1,0 +1,13 @@
+#page-wrapper {
+    width: 100%;
+}
+
+.margin-bottom-10 {
+    margin-bottom: 10px;
+}
+.new-app {
+    margin: 0 10px;
+}
+.sidebar.navbar-nav.toggled .new-app {
+    display: none;
+}

@@ -15,26 +15,26 @@
  <h1 class="page-header">Applications</h1>
 
 <ul class="nav nav-pills">
-<li><a href="application.php?id=<?PHP echo $app->id; ?>"><?PHP echo $app->name; ?></a></li>
-<li class="active"><a href="versions.php?id=<?PHP echo $app->id; ?>">Versions</a></li>
-<li><a href="version-new.php?id=<?PHP echo $app->id; ?>">Release New Version</a></li>
+<li class="nav-link"><a class="nav-link" href="application.php?id=<?PHP echo $app->id; ?>"><?PHP echo $app->name; ?></a></li>
+<li class="nav-link"><a class="nav-link active" href="versions.php?id=<?PHP echo $app->id; ?>">Versions</a></li>
+<li class="nav-link"><a class="nav-link" href="version-new.php?id=<?PHP echo $app->id; ?>">Release New Version</a></li>
 </ul>
 
 </div>
 
 </div>
 
-<br><br>
+<br>
 
 <div class="row">
 <div class="col-lg-12">
 
-<div class="panel panel-default">
-                        <div class="panel-heading">
+<div class="card">
+                        <div class="card-header">
                             Your Applications
                         </div>
-                        <!-- /.panel-heading -->
- <div class="panel-body">
+                        <!-- /.card-header -->
+ <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-striped">
                                     <thead>
@@ -62,9 +62,9 @@
                             </div>
                             <!-- /.table-responsive -->
                         </div>
-                        <!-- /.panel-body -->
+                        <!-- /.card-body -->
                     </div>
-                    <!-- /.panel -->
+                    <!-- /.card -->
                 </div>
 </div></div>
 

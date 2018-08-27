@@ -42,24 +42,24 @@
  <h1 class="page-header">Users</h1>
 
 <ul class="nav nav-pills">
-<li><a href="users.php">Users</a></li>
-<li class="active"><a href="user-new.php">Create new user</a></li>
+    <li class="nav-link"><a class="nav-link" href="users.php">Users</a></li>
+    <li class="nav-link"><a class="nav-link active" href="user-new.php">Create new user</a></li>
 </ul>
 
 </div>
 
 </div>
 
-<br><br>
+<br>
 
 
   <div class="row">
                 <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
+                    <div class="card">
+                        <div class="card-header">
                             Create User
                         </div>
-                        <div class="panel-body">
+                        <div class="card-body">
                             <div class="row">
   
                                 <div class="col-lg-12">
@@ -82,9 +82,9 @@
                             </div>
                             <!-- /.row (nested) -->
                         </div>
-                        <!-- /.panel-body -->
+                        <!-- /.card-body -->
                     </div>
-                    <!-- /.panel -->
+                    <!-- /.card -->
                 </div>
                 <!-- /.col-lg-12 -->
             </div>

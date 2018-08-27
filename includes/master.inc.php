@@ -11,6 +11,7 @@
 
     // Global include files
     require DOC_ROOT . '/includes/functions.inc.php'; // __autoload() is contained in this file
+    require DOC_ROOT . '/includes/class.error.php';
     require DOC_ROOT . '/includes/class.dbobject.php';
     require DOC_ROOT . '/includes/class.objects.php';
     require DOC_ROOT . '/includes/markdown.inc.php';
@@ -40,7 +41,7 @@
     $Auth = Auth::getAuth();
 
     // Object for tracking and displaying error messages
-    $Error = Error::getError();
+    $Error = ErrorApp::getError();
 
     $nav = '';
 

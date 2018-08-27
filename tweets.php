@@ -67,29 +67,38 @@
  <h1 class="page-header">Tweets</h1>
 
 <ul class="nav nav-pills">
-								<li class="<?PHP if(!isset($_GET['id'])) echo 'active'; ?>"><a href="tweets.php">All Apps</a></li>
-								<?PHP foreach($applications as $a) : ?>
-								<?PHP if(!in_array($a->id, $available_apps)) continue; ?>
-								<li class="<?PHP if(@$_GET['id'] == $a->id) echo 'active'; ?>"><a href="tweets.php?id=<?PHP echo $a->id; ?>"><?PHP echo $a->name; ?></a></li>
-								<?PHP endforeach; ?>
+        <?PHP if(!isset($_GET['id'])): ?>
+            <li class="nav-link"><a class="nav-link active" href="tweets.php">All Apps</a></li>
+        <?php else: ?>
+            <li class="nav-link"><a class="nav-link" href="tweets.php">All Apps</a></li>
+        <?php endif; ?>
+        <?PHP foreach($applications as $a): ?>
+            <?PHP if(in_array($a->id, $available_apps)): ?>
+                <?php if(@$_GET['id'] == $a->id): ?>
+                    <li class="nav-link"><a class="nav-link active" href="tweets.php?id=<?PHP echo $a->id; ?>"><?PHP echo $a->name; ?></a></li>
+                <?php else: ?>
+                    <li class="nav-link"><a class="nav-link" href="tweets.php?id=<?PHP echo $a->id; ?>"><?PHP echo $a->name; ?></a></li>
+                <?php endif; ?>
+            <?php endif; ?>
+        <?PHP endforeach; ?>
 </ul>
 
 </div>
 
 </div>
 
-<br><br>
+<br>
 
 
 
 <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
+                <div class="col-lg-12 margin-bottom-10">
+                    <div class="card">
+                        <div class="card-header">
                             Tweets
                         </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
+                        <!-- /.card-header -->
+                        <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-striped">
                                     <tbody>
@@ -122,37 +131,37 @@
                                 </table>
                             </div>
                         </div>
-                        <!-- /.panel-body -->
+                        <!-- /.card-body -->
                     </div>
-                    <!-- /.panel -->
+                    <!-- /.card -->
                 </div>
 </div>
 
 
 <div class="row">
                 <div class="col-lg-6">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
+                    <div class="card">
+                        <div class="card-header">
                             Summary
                         </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
+                        <!-- /.card-header -->
+                        <div class="card-body">
                             <p><?PHP echo count($tweets); ?> tweets</p>
                         <p><a href="tweets.php?id=<?PHP echo $app_id; ?>&amp;read=1">Mark all as read</a></p>
                         <p><a href="tweets.php?id=<?PHP echo $app_id; ?>&amp;refresh=1">Refresh All</a></p>
                         </div>
-                        <!-- /.panel-body -->
+                        <!-- /.card-body -->
                     </div>
-                    <!-- /.panel -->
+                    <!-- /.card -->
 </div>	
 
                 <div class="col-lg-6">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
+                    <div class="card">
+                        <div class="card-header">
                             Tweet Terms
                         </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
+                        <!-- /.card-header -->
+                        <div class="card-body">
                          <ul class="biglist">
 							<?PHP foreach($tweet_terms as $tt) : ?>
 							<?PHP foreach(explode(',', $tt) as $term) : ?>
@@ -161,9 +170,9 @@
 							<?PHP endforeach; ?>
 						</ul>
                         </div>
-                        <!-- /.panel-body -->
+                        <!-- /.card-body -->
                     </div>
-                    <!-- /.panel -->
+                    <!-- /.card -->
 </div>	
 </div>
 

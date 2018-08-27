@@ -97,25 +97,25 @@
 <h1 class="page-header">Applications</h1>
 
 <ul class="nav nav-pills">
-<li><a href="application.php?id=<?PHP echo $app->id; ?>"><?PHP echo $app->name; ?></a></li>
-<li><a href="versions.php?id=<?PHP echo $app->id; ?>">Versions</a></li>
-<li class="active"><a href="version-new.php?id=<?PHP echo $app->id; ?>">Release New Version</a></li>
+<li class="nav-link"><a class="nav-link" href="application.php?id=<?PHP echo $app->id; ?>"><?PHP echo $app->name; ?></a></li>
+<li class="nav-link"><a class="nav-link" href="versions.php?id=<?PHP echo $app->id; ?>">Versions</a></li>
+<li class="nav-link"><a class="nav-link active"href="version-new.php?id=<?PHP echo $app->id; ?>">Release New Version</a></li>
 </ul>
 
 </div>
 
 </div>
 
-<br><br>
+<br>
 
 
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
+                    <div class="card">
+                        <div class="card-header">
                             Create Manual Order
                         </div>
-                        <div class="panel-body">
+                        <div class="card-body">
                             <div class="row">
   
                                 <div class="col-lg-12">
@@ -136,9 +136,9 @@
                             </div>
                             <!-- /.row (nested) -->
                         </div>
-                        <!-- /.panel-body -->
+                        <!-- /.card-body -->
                     </div>
-                    <!-- /.panel -->
+                    <!-- /.card -->
                 </div>
                 <!-- /.col-lg-12 -->
             </div>

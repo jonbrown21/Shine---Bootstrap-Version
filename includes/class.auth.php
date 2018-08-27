@@ -218,7 +218,6 @@
 
             if($Config->useHashedPasswords === false)
                 $row['password'] = $this->createHashedPassword($row['password']);
-
             if($pw != $row['password']) return false;
 
             $this->id       = $row['id'];
@@ -250,7 +249,7 @@
             return setcookie('spf', $s, time()+60*60*24*30, '/', $Config->authDomain);
         }
 
-        private function createHashedPassword($pw)
+        public function createHashedPassword($pw)
         {
             $Config = Config::getConfig();
             return sha1($pw . $Config->authSalt);
