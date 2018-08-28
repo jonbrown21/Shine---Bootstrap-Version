@@ -1,5 +1,6 @@
 <?PHP
-    class Error
+    // changed name of class. PHP now has its own builtin Error class 
+    class ErrorApp
     {
         // Singleton object. Leave $me alone.
         private static $me;
@@ -17,7 +18,7 @@
         public static function getError()
         {
             if(is_null(self::$me))
-                self::$me = new Error();
+                self::$me = new ErrorApp();
             return self::$me;
         }
 

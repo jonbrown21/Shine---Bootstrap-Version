@@ -1,3 +1,7 @@
+<?php
+$file = $_SERVER['SCRIPT_NAME'];
+$title = ucwords(str_replace("-", " ", str_replace(array("/", ".php"), "", $file)));
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,7 +16,8 @@
     <title>Shine</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!--<link href="css/bootstrap.min.css" rel="stylesheet">-->
+    <link href="bootstrap4/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
     <link href="css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
@@ -21,7 +26,8 @@
     <link href="css/plugins/timeline.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="css/sb-admin-2.css" rel="stylesheet">
+    <link href="sbadmin/css/sb-admin.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
 
     <!-- Morris Charts CSS -->
     <link href="css/plugins/morris.css" rel="stylesheet">
@@ -40,10 +46,20 @@
 
 
 
-
 <body>
-
-    <div id="wrapper">
+    <div id="page-top">
             <?PHP include('inc/nav.inc.php'); ?>
       
 	<div id="page-wrapper">
+        <div id="content-wrapper">
+
+            <div class="container-fluid">
+
+              <!-- Breadcrumbs-->
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                  <a href="/">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item active"><?php echo $title; ?></li>
+              </ol>
+

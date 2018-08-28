@@ -51,13 +51,13 @@
             </div>
             <!-- /.row -->
              <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
+                <div class="col-lg-12 margin-bottom-10">
+                    <div class="card">
+                        <div class="card-header">
                             Your Applications
                         </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
+                        <!-- /.card-header -->
+                        <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-striped">
                                     <thead>
@@ -90,9 +90,9 @@
                             </div>
                             <!-- /.table-responsive -->
                         </div>
-                        <!-- /.panel-body -->
+                        <!-- /.card-body -->
                     </div>
-                    <!-- /.panel -->
+                    <!-- /.card -->
                 </div>
 
 
@@ -100,13 +100,13 @@
 
 
 
-                <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
+                <div class="col-lg-12 margin-bottom-10">
+                    <div class="card">
+                        <div class="card-header">
                             Recent Orders (<?PHP echo number_format(Order::totalOrders()); ?> total)
                         </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
+                        <!-- /.card-header -->
+                        <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-striped">
                                     <thead>
@@ -131,64 +131,57 @@
                             </div>
                             <!-- /.table-responsive -->
                         </div>
-                        <!-- /.panel-body -->
+                        <!-- /.card-body -->
                     </div>
-                    <!-- /.panel -->
+                    <!-- /.card -->
                 </div>
 
-<div class="row">
-<div class="col-lg-12">
-<div class="col-lg-6">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <i class="fa fa-bar-chart-o fa-fw"></i> Downloads 30 Days
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                             <div class="row">
-                                <div style="margin: 20px;">
+        <div class="col-lg-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <i class="fa fa-bar-chart-o fa-fw"></i> Downloads 30 Days
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                     <div class="row">
+                                        <div style="margin: 20px;">
 
-			<canvas id="canvas"></canvas>
+                    <canvas id="canvas"></canvas>
+
+                                        </div>
+                                        <!-- /.col-lg-8 (nested) -->
+                                    </div>
+                            
 
                                 </div>
-                                <!-- /.col-lg-8 (nested) -->
+                                <!-- /.card-body -->
                             </div>
-                    
-
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
-                    
+                            <!-- /.card -->
+                            
 
 
-</div>
+        </div>
 
 
-<div class="col-lg-6">
-                   <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <i class="fa fa-bar-chart-o fa-fw"></i> Downloads 24 Hours
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div class="row">
-                                <div style="margin: 20px;">
-
-			<canvas id="canvas2"></canvas>
-
+        <div class="col-lg-6">
+                           <div class="card">
+                                <div class="card-header">
+                                    <i class="fa fa-bar-chart-o fa-fw"></i> Downloads 24 Hours
                                 </div>
-                                <!-- /.col-lg-8 (nested) -->
-                            </div>
-                    
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div style="margin: 20px;">
+
+                    <canvas id="canvas2"></canvas>
+
+                                        </div>
+                                        <!-- /.col-lg-8 (nested) -->
+                                    </div>
+                            
 
 
-</div>
-
-</div>
-
-
-            <!-- /.row -->
+        </div>
 
 
 <?PHP include('inc/footer.inc.php'); ?>

@@ -26,25 +26,25 @@
  <h1 class="page-header">Users</h1>
 
 <ul class="nav nav-pills">
-<li class="active"><a href="users.php">Users</a></li>
-<li><a href="user-new.php">Create new user</a></li>
+    <li class="nav-link"><a class="nav-link active" href="users.php">Users</a></li>
+    <li class="nav-link"><a class="nav-link" href="user-new.php">Create new user</a></li>
 </ul>
 
 </div>
 
 </div>
 
-<br><br>
+<br>
 
 <div class="row">
 <div class="col-lg-12">
 
-<div class="panel panel-default">
-                        <div class="panel-heading">
+<div class="card">
+                        <div class="card-header">
                             Your Applications
                         </div>
-                        <!-- /.panel-heading -->
- <div class="panel-body">
+                        <!-- /.card-heading -->
+ <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-striped">
                                     <thead>
@@ -72,9 +72,9 @@
                             </div>
                             <!-- /.table-responsive -->
                         </div>
-                        <!-- /.panel-body -->
+                        <!-- /.card-body -->
                     </div>
-                    <!-- /.panel -->
+                    <!-- /.card -->
                 </div>
 </div></div>
 

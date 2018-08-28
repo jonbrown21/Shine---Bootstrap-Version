@@ -85,10 +85,18 @@
  <h1 class="page-header">Sparkle Stats</h1>
 
 <ul class="nav nav-pills">
-<li class="<?PHP if(!isset($_GET['id'])) echo 'active'; ?>"><a href="stats.php">All Apps</a></li>
-<?PHP foreach($applications as $a) : ?>
-<li class="<?PHP if(@$_GET['id'] == $a->id) echo 'active'; ?>"><a href="stats.php?id=<?PHP echo $a->id; ?>"><?PHP echo $a->name; ?></a></li>
-<?PHP endforeach; ?>
+    <?PHP if(!isset($_GET['id'])): ?>
+        <li class="nav-link"><a class="nav-link active" href="stats.php">All Apps</a></li>
+    <?php else: ?>
+        <li class="nav-link"><a class="nav-link active" href="stats.php">All Apps</a></li>
+    <?php endif; ?>
+    <?PHP foreach($applications as $a) : ?>
+        <?PHP if(@$_GET['id'] == $a->id): ?>
+            <li class="nav-link"><a class="nav-link active" href="stats.php?id=<?PHP echo $a->id; ?>"><?PHP echo $a->name; ?></a></li>
+        <?php else: ?>
+            <li class="nav-link"><a class="nav-link" href="stats.php?id=<?PHP echo $a->id; ?>"><?PHP echo $a->name; ?></a></li>
+        <?php endif; ?>
+    <?php endforeach; ?>
 </ul>
 
 </div>
@@ -99,12 +107,12 @@
 
 <div class="row">
 <div class="col-lg-12">
-                   <div class="panel panel-default">
-                        <div class="panel-heading">
+                   <div class="card">
+                        <div class="card-header">
                             <i class="fa fa-bar-chart-o fa-fw"></i> Stats
                         </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
+                        <!-- /.card-header -->
+                        <div class="card-body">
                             <div class="row">
                                 <div style="margin: 20px;">
 

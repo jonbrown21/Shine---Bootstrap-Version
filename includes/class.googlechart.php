@@ -203,7 +203,7 @@ class googleChart {
 	var $negativeMode=false; //negative mode converts numbers to positive so google can display them
 	var $barWidth=null; //sets the width of the bars for vert/horiz bar charts.
 	
-	function googleChart($data=null,$type=null,$title=null,$dimensions=null) {
+	public function __construct($data=null,$type=null,$title=null,$dimensions=null) {
 		if ($data) $this->loadData($data);
 		if ($type) $this->setType($type);
 		if ($title) $this->title=$title;

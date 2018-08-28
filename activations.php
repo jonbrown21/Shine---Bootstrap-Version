@@ -51,27 +51,35 @@
  <h1 class="page-header">Activations</h1>
 
 <ul class="nav nav-pills">
-								<li class="<?PHP if(!isset($_GET['id'])) echo 'active'; ?>"><a href="activations.php">All Activations</a></li>
-								<?PHP foreach($applications as $a) : if(!in_array($a->id, $available_apps)) continue; ?>
-								<li class="<?PHP if(@$_GET['id'] == $a->id) echo 'active'; ?>"><a href="activations.php?id=<?PHP echo $a->id; ?>"><?PHP echo $a->name; ?></a></li>
-								<?PHP endforeach; ?>
+                        <?PHP if(!isset($_GET['id'])): ?>
+								<li class="nav-link" data-toggle="pill"><a class="nav-link active" href="activations.php">All Activations</a></li>
+                        <?php else: ?>
+								<li class="nav-link" data-toggle="pill"><a class="nav-link" href="activations.php">All Activations</a></li>
+                        <?php endif; ?>
+                        <?PHP foreach($applications as $a) : if(!in_array($a->id, $available_apps)) continue; ?>
+                            <?PHP if(@$_GET['id'] == $a->id): ?>
+                                <li class="nav-link" data-toggle="pill"><a class="nav-link active" href="activations.php?id=<?PHP echo $a->id; ?>"><?PHP echo $a->name; ?></a></li>
+                            <?php else: ?>
+                                <li class="nav-link" data-toggle="pill"><a class="nav-link" href="activations.php?id=<?PHP echo $a->id; ?>"><?PHP echo $a->name; ?></a></li>
+                            <?php endif; ?>
+                        <?PHP endforeach; ?>
 </ul>
 
 </div>
 
 </div>
 
-<br><br>
+<br>
 
 
 <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
+                <div class="col-lg-12 margin-bottom-10">
+                    <div class="card">
+                        <div class="card-header">
                             Your Applications
                         </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
+                        <!-- /.card-header -->
+                        <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-striped">
                                     <thead>
@@ -101,84 +109,86 @@
                 
 <hr>            <!-- /.table-responsive -->
 <div class="text-center">
-<ul class="pagination">
-							  <li><a href="activations.php?page=<?PHP echo $pager->prevPage(); ?>&amp;id=<?PHP echo @$app_id; ?>">&#171; Prev</a></li>
-								<?PHP for($i = 1; $i <= $pager->numPages; $i++) : ?>
-								<?PHP if($i == $pager->page) : ?>
-                                <li class="active"><a href="activations.php?page=<?PHP echo $i; ?>&amp;id=<?PHP echo @$app_id; ?>"><?PHP echo $i; ?></a></li>
-								<?PHP else : ?>
-                                <li><a href="activations.php?page=<?PHP echo $i; ?>&amp;id=<?PHP echo @$app_id; ?>"><?PHP echo $i; ?></a></li>
-								<?PHP endif; ?>
-								<?PHP endfor; ?>
-                                <li><a href="activations.php?page=<?PHP echo $pager->nextPage(); ?>&amp;id=<?PHP echo @$app_id; ?>">Next &#187;</a></li>
-</ul>
+<nav aria-label="Activation pagination">
+    <ul class="pagination">
+                                  <li class="page-item"><a class="page-link" href="activations.php?page=<?PHP echo $pager->prevPage(); ?>&amp;id=<?PHP echo @$app_id; ?>">&#171; Prev</a></li>
+                                    <?PHP for($i = 1; $i <= $pager->numPages; $i++) : ?>
+                                    <?PHP if($i == $pager->page) : ?>
+                                    <li class="page-item active"><a class="page-link" href="activations.php?page=<?PHP echo $i; ?>&amp;id=<?PHP echo @$app_id; ?>"><?PHP echo $i; ?></a></li>
+                                    <?PHP else : ?>
+                                    <li class="page-item"><a class="page-link" href="activations.php?page=<?PHP echo $i; ?>&amp;id=<?PHP echo @$app_id; ?>"><?PHP echo $i; ?></a></li>
+                                    <?PHP endif; ?>
+                                    <?PHP endfor; ?>
+                                    <li class="page-item"><a class="page-link" href="activations.php?page=<?PHP echo $pager->nextPage(); ?>&amp;id=<?PHP echo @$app_id; ?>">Next &#187;</a></li>
+    </ul>
+</nav>
 </div>
                         </div>
-                        <!-- /.panel-body -->
+                        <!-- /.card-body -->
                     </div>
-                    <!-- /.panel -->
+                    <!-- /.card -->
                 </div>
 </div>
 
 
 
 <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
+                <div class="col-lg-12 margin-bottom-10">
+                    <div class="card">
+                        <div class="card-header">
                             Top Emails
                         </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
+                        <!-- /.card-header -->
+                        <div class="card-body">
                             <ul class="biglist">
 							<?PHP foreach($top_emails as $x) : ?>
 							<li><a href="activations.php?q=<?PHP echo $x['name']; ?>"><?PHP echo $x['name']; ?> (<?PHP echo $x['num']; ?>)</a></li>
 							<?PHP endforeach; ?>
 						</ul>
                         </div>
-                        <!-- /.panel-body -->
+                        <!-- /.card-body -->
                     </div>
-                    <!-- /.panel -->
+                    <!-- /.card -->
 </div>	
 </div>
 
 <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
+                <div class="col-lg-12 margin-bottom-10">
+                    <div class="card">
+                        <div class="card-header">
                             Top Serials
                         </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
+                        <!-- /.card-header -->
+                        <div class="card-body">
                             <ul class="biglist">
 							<?PHP foreach($top_serials as $x) : ?>
 							<li><a href="activations.php?q=<?PHP echo $x['serial_number']; ?>"><?PHP echo array_shift(explode('-', $x['serial_number'])); ?>... (<?PHP echo $x['num']; ?>)</a></li>
 							<?PHP endforeach; ?>
 						</ul>
                         </div>
-                        <!-- /.panel-body -->
+                        <!-- /.card-body -->
                     </div>
-                    <!-- /.panel -->
+                    <!-- /.card -->
 </div>	
 </div>
 
 <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
+                <div class="col-lg-12 margin-bottom-10">
+                    <div class="card">
+                        <div class="card-header">
                             Top IPs
                         </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
+                        <!-- /.card-header -->
+                        <div class="card-body">
                             <ul class="biglist">
 							<?PHP foreach($top_ips as $x) : ?>
 							<li><a href="activations.php?q=<?PHP echo $x['ip']; ?>"><?PHP echo $x['ip']; ?> (<?PHP echo $x['num']; ?>)</a></li>
 							<?PHP endforeach; ?>
 						</ul>
                         </div>
-                        <!-- /.panel-body -->
+                        <!-- /.card-body -->
                     </div>
-                    <!-- /.panel -->
+                    <!-- /.card -->
 </div>	
 </div>
 
