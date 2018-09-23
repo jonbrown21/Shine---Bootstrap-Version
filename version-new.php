@@ -123,7 +123,7 @@
 <form action="version-new.php?id=<?PHP echo $app->id; ?>" method="post" enctype="multipart/form-data">
 								<p><label for="version_number">Sparkle Version Number</label> <input type="text" name="version_number" id="version_number" value="<?PHP echo $version_number;?>" class="form-control"></p>
 								<p><label for="human_version">Human Readable Version Number</label> <input type="text" name="human_version" id="human_version" value="<?PHP echo $human_version;?>" class="form-control"></p>
-								<p><label for="release_notes">Release Notes</label> <textarea class="text" name="release_notes" id="release_notes"><?PHP echo $release_notes; ?></textarea></p>
+								<p><label for="release_notes">Release Notes</label> <textarea class="form-control" name="release_notes" id="release_notes"><?PHP echo $release_notes; ?></textarea></p>
 								
 								<!-- Make sure that when you set the upload directory you must set the path relative to your shine installation use ../ relative up / down directory path indicators in the text field -->
                                                                 <p><label for="dir">Base Dir</label> <input type="text" name="dir" id="dir" value="" class="form-control"></p>

@@ -50,7 +50,7 @@
       <!-- Sidebar -->
       <ul class="sidebar navbar-nav">
         <li class="nav-item active">
-          <a class="nav-link" href="index.html">
+          <a class="nav-link" href="#">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Menu</span>
           </a>
@@ -90,19 +90,22 @@
             <i class="fa fa-line-chart fa-fw"></i>
             <span>Sparkle Stats</span></a>
         </li>
+<li class="nav-item active">
+          <a class="nav-link" href="#">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Add New App</span>
+          </a>
+        </li>
         <form class="new-app" action="index.php" method="post">
             <li class="sidebar-search" style="line-height: 2.5em;">
-            Create App
-                                        <div class="input-group custom-search-form">
-                                            <input type="text" class="form-control" placeholder="App Name" name="name" id="appname">
-                                            <span class="input-group-btn">
-                                            <button class="btn btn-default" type="submit" name="btnNewApp" id="btnNewApp">
-                                                <i class="fa fa-arrow-circle-right"></i>
-                                            </button>
-                                        </span>
-                                        </div>
-                                        <!-- /input-group -->
-                                    </li>
-            </form>	
 
+<div class="input-group mb-3 custom-search-form">
+  <input type="text" class="form-control" placeholder="App Name" name="name" id="appname" aria-describedby="basic-addon2">
+  <div class="input-group-append">
+    <button class="btn btn-primary" type="submit" name="btnNewApp" id="btnNewApp"><i class="fa fa-arrow-circle-right"></i></button>
+  </div>
+</div>
+
+            </li>
+            </form>
       </ul>
