@@ -11,3 +11,6 @@
 .sidebar.navbar-nav.toggled .new-app {
     display: none;
 }
+.card {
+    margin-bottom: 60px !important;
+}

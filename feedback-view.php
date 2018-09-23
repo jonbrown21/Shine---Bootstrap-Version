@@ -50,14 +50,19 @@
 <div class="row">
 <div class="col-lg-12">
 
- <h1 class="page-header">Orders</h1>
+ <h1 class="page-header">Feedback</h1>
 
 <ul class="nav nav-pills">
-								<li><a href="feedback.php">All Feedback</a></li>
-								<li><a href="feedback.php?type=support">Support Questions</a></li>
-								<li><a href="feedback.php?type=bug">Bug Reports</a></li>
-								<li><a href="feedback.php?type=feature">Feature Requests</a></li>
-								<li class="active"><a href="feedback-view.php?id=<?PHP echo $f->id; ?>">Feedback #<?PHP echo $f->id; ?></a></li>
+
+<?PHP if(!isset($_GET['id'])): ?>
+    <li class="nav-link" data-toggle="pill"><a class="nav-link" href="feedback.php">All Feedback</a></li>
+<?php else: ?>
+    <li class="nav-link" data-toggle="pill"><a class="nav-link active" href="feedback.php">All Feedback</a></li>
+<?php endif; ?>
+								<li class="nav-link"><a href="feedback.php?type=support" class="nav-link">Support Questions</a></li>
+                                                                <li class="nav-link"><a href="feedback.php?type=bug" class="nav-link" >Bug Reports</a></li>
+                                                                <li class="nav-link"><a href="feedback.php?type=feature" class="nav-link">Feature Requests</a></li>
+
 </ul>
 
 
@@ -73,12 +78,12 @@
 
 <div class="row">
                 <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
+                    <div class="card">
+                        <div class="card-header">
                             Feedback #<?PHP echo $f->id; ?>
                         </div>
                         <!-- /.panel-heading -->
-                        <div class="panel-body">
+                        <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-striped">
                                     <tr>
@@ -144,12 +149,12 @@
 
 <div class="row">
                 <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
+                    <div class="card panel-default">
+                        <div class="card-header">
                             Feedback Notes
                         </div>
                         <!-- /.panel-heading -->
-                        <div class="panel-body">
+                        <div class="card-body">
                             <form action="feedback-view.php?id=<?PHP echo $f->id; ?>" method="post" class="bd">
 								<textarea style="width:100%;" name="notes" id="notes" class="form-control"><?PHP echo $f->notes; ?></textarea><br>
 								<input type="submit" name="btnNotes" value="Save Notes" id="btnNotes" class="btn btn-lg btn-success"><br><br>
@@ -165,12 +170,12 @@
 
 <div class="row">
                 <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
+                    <div class="card panel-default">
+                        <div class="card-header">
                             Customer Info
                         </div>
                         <!-- /.panel-heading -->
-                        <div class="panel-body">
+                        <div class="card-body">
                             <div id="rapportive" class="bd"></div>
                         </div>
                         <!-- /.panel-body -->
@@ -183,12 +188,12 @@
 
 <div class="row">
                 <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
+                    <div class="card card-default">
+                        <div class="card-header">
                             Related Feedback
                         </div>
                         <!-- /.panel-heading -->
-                        <div class="panel-body">
+                        <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-striped">
                                     <thead>
@@ -220,12 +225,12 @@
 
 <div class="row">
                 <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
+                    <div class="card card-default">
+                        <div class="card-header">
                             Related Orders
                         </div>
                         <!-- /.panel-heading -->
-                        <div class="panel-body">
+                        <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-striped">
                                     <thead>
@@ -256,12 +261,12 @@
 
 <div class="row">
                 <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
+                    <div class="card card-default">
+                        <div class="card-header">
                             Related Activations
                         </div>
                         <!-- /.panel-heading -->
-                        <div class="panel-body">
+                        <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-striped">
                                     <thead>
