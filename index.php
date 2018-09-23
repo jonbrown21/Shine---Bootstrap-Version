@@ -144,44 +144,34 @@
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
-                                     <div class="row">
-                                        <div style="margin: 20px;">
+                                     <div class="row" syle="margin: 20px;">
 
-                    <canvas id="canvas"></canvas>
+                   			 <canvas id="canvas"></canvas>
 
-                                        </div>
                                         <!-- /.col-lg-8 (nested) -->
                                     </div>
-                            
 
                                 </div>
                                 <!-- /.card-body -->
                             </div>
                             <!-- /.card -->
-                            
 
 
         </div>
 
 
         <div class="col-lg-6">
-                           <div class="card">
-                                <div class="card-header">
-                                    <i class="fa fa-bar-chart-o fa-fw"></i> Downloads 24 Hours
-                                </div>
+              <div class="card">
+                     <div class="card-header">
+                          <i class="fa fa-bar-chart-o fa-fw"></i> Downloads 24 Hours
+                      </div>
                                 <!-- /.card-header -->
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div style="margin: 20px;">
-
-                    <canvas id="canvas2"></canvas>
-
-                                        </div>
-                                        <!-- /.col-lg-8 (nested) -->
-                                    </div>
-                            
-
-
+                      <div class="card-body">
+                            <div class="row" style="margin: 20px;">
+			    	<canvas id="canvas2"></canvas>
+                            </div>
+		      </div>
+	      </div>
         </div>
 
 
@@ -195,7 +185,7 @@
         animation : false,
         bezierCurve : true,
         scaleStartValue: 0,
-		showXLabels: 1,
+	showXLabels: 1,
     };
 
 
