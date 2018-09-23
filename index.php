@@ -1,10 +1,10 @@
 <?PHP
 	require 'includes/master.inc.php';
 	$Auth->requireAdmin('login.php');
-    $db = Database::getDatabase();
+        $db = Database::getDatabase();
 	$nav = 'applications';
 
-    // Create a new application if needed
+        // Create a new application if needed
 	if(isset($_POST['btnNewApp']) && strlen($_POST['name']))
 	{
 		$a = new Application();
@@ -12,10 +12,11 @@
 		$a->insert();
 		redirect('application.php?id=' . $a->id);
 	}
-	
+
+
 	// Get a list of our apps
 	$apps   = DBObject::glob('Application', 'SELECT * FROM shine_applications WHERE hidden = 0 ORDER BY name');
-	
+
 	// Get our recent orders
 	$orders = DBObject::glob('Order', 'SELECT * FROM shine_orders ORDER BY dt DESC LIMIT 10');
 

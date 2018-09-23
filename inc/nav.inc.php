@@ -100,7 +100,7 @@
             <li class="sidebar-search" style="line-height: 2.5em;">
 
 <div class="input-group mb-3 custom-search-form">
-  <input type="text" class="form-control" placeholder="App Name" name="name" id="appname" aria-describedby="basic-addon2">
+  <input type="text" class="form-control" placeholder="App Name" name="name" id="appname">
   <div class="input-group-append">
     <button class="btn btn-primary" type="submit" name="btnNewApp" id="btnNewApp"><i class="fa fa-arrow-circle-right"></i></button>
   </div>
