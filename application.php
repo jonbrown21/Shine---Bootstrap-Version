@@ -351,11 +351,6 @@ Thank-you Email
 </div>
 
 <div class="form-group">
-<label for="email_subject">Email Subject</label>
-<input type="text" class="form-control" name="email_subject" value="<?PHP echo $email_subject; ?>" id="email_subject">
-</div>
-
-<div class="form-group">
 <label for="email_body">Email Body</label>
 <textarea name="email_body" id="email_body" class="form-control"><?PHP echo $email_body ?></textarea><br>
 <div class="alert alert-info">
