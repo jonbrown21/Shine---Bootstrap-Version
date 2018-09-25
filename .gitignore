@@ -1,4 +1,5 @@
 class.config.php
 files/
 phpmyadmin/
+ssl/
 .DS_Store
