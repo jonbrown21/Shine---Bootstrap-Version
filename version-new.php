@@ -65,6 +65,10 @@
 
 function sign_file($filename, $keydata)
     {
+
+$output = shell_exec('openssl version 2>&1');
+print_r($output);
+
         $binary_hash = shell_exec('/usr/bin/openssl dgst -sha1 -binary < ' . $filename);
         $hash_tmp_file = tempnam('/tmp', 'foo');
         file_put_contents($hash_tmp_file, $binary_hash);

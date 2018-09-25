@@ -171,12 +171,12 @@
                         <!-- /.panel-heading -->
                         <div class="card-body">
                             <ul class="biglist">
-							<li><a href="order.php?id=<?PHP echo $o->id; ?>&amp;act=email" id="email">Email to User</a></li>
-							<li><a href="<?PHP echo $o->getDownloadLink(); ?>">Download Link (does not expire)</a></li>
-							<li><a href="<?PHP echo $o->getDownloadLink(86400); ?>">Download Link (1 day)</a></li>
-							<li><a href="<?PHP echo $o->getDownloadLink(86400 * 3); ?>">Download Link (3 days)</a></li>
-							<li><a href="<?PHP echo $o->getDownloadLink(86400 * 7); ?>">Download Link (1 week)</a></li>
-							<li><a href="order.php?id=<?PHP echo $o->id; ?>&amp;act=deactivate" id="deactivate">Deactivate License</a></li>
+							<li><a class="btn btn-secondary btn-block" href="order.php?id=<?PHP echo $o->id; ?>&amp;act=email" id="email">Email to User</a></li><br>
+							<li><a class="btn btn-secondary btn-block" href="<?PHP echo $o->getDownloadLink(); ?>">Download Link (does not expire)</a></li><br>
+							<li><a class="btn btn-secondary btn-block" href="<?PHP echo $o->getDownloadLink(86400); ?>">Download Link (1 day)</a></li><br>
+							<li><a class="btn btn-secondary btn-block" href="<?PHP echo $o->getDownloadLink(86400 * 3); ?>">Download Link (3 days)</a></li><br>
+							<li><a class="btn btn-secondary btn-block" href="<?PHP echo $o->getDownloadLink(86400 * 7); ?>">Download Link (1 week)</a></li><br>
+							<li><a class="btn btn-secondary btn-block" href="order.php?id=<?PHP echo $o->id; ?>&amp;act=deactivate" id="deactivate">Deactivate License</a></li>
 						</ul>
                         </div>
                         <!-- /.panel-body -->
