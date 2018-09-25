@@ -3,8 +3,7 @@
 	require 'includes/master.inc.php';
 	$Auth->requireAdmin('login.php');
 	$nav = 'applications';
-	$path = '/var/www/files/';
-	$s3bucketurl = 'http://shine2.jonbrown.org.s3-website-us-east-1.amazonaws.com';
+
 	$app = new Application($_GET['id']);
 
 	if(!$app->ok()) redirect('index.php');
@@ -36,14 +35,14 @@
 
 			if ($radio_value == 'local') {
 
-			move_uploaded_file( $_FILES['file']['tmp_name'], $_POST['dir'] . basename( $_FILES['file']['name'] ) );
+			move_uploaded_file( $_FILES['file']['tmp_name'], $app->dirpath . basename( $_FILES['file']['name'] ) );
 			$v->url = slash($app->link) . $_FILES['file']['name'];
 
 			} else {
 
 			$s3 = new S3($app->s3key, $app->s3pkey);
 			$s3->uploadFile($app->s3bucket, $object, $_FILES['file']['tmp_name'], true);
-			$v->url = slash($s3bucketurl) . $object;
+			$v->url = slash($app->s3url) . $object;
 			}
 
 			$v->insert();
@@ -140,7 +139,6 @@ print_r($output);
 </div>
 								</p>			
 								<!-- Make sure that when you set the upload directory you must set the path relative to your shine installation use ../ relative up / down directory path indicators in the text field -->
-                                                                <p><label for="dir">Base Dir</label> <input type="text" name="dir" id="dir" value="<?php echo $path; ?>" class="form-control"></p>
                                                                 <p><label for="file">Application Archive</label> <input type="file" name="file" id="file" class="form-control"></p>
 								<p><input type="submit" name="btnCreateVersion" value="Create Version" id="btnCreateVersion" class="btn btn-lg btn-success btn-block"></p>
 							</form>

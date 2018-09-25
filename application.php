@@ -21,6 +21,8 @@
 			$app->s3pkey            = $_POST['s3pkey'];
 			$app->s3bucket          = $_POST['s3bucket'];
 			$app->s3path            = $_POST['s3path'];
+			$app->s3url             = $_POST['s3url'];
+			$app->dirpath           = $_POST['dirpath'];
 			$app->sparkle_key       = $_POST['sparkle_key'];
 			$app->sparkle_pkey      = $_POST['sparkle_pkey'];
 			$app->ap_key            = $_POST['ap_key'];
@@ -48,6 +50,8 @@
 			$s3pkey            = $_POST['s3pkey'];
 			$s3bucket          = $_POST['s3bucket'];
 			$s3path            = $_POST['s3path'];
+			$s3url             = $_POST['s3url'];
+			$dirpath           = $_POST['dirpath'];
 			$sparkle_key       = $_POST['sparkle_key'];
 			$sparkle_pkey      = $_POST['sparkle_pkey'];
 			$ap_key            = $_POST['ap_key'];
@@ -74,6 +78,8 @@
 		$s3pkey            = $app->s3pkey;
 		$s3bucket          = $app->s3bucket;
 		$s3path            = $app->s3path;
+                $s3url             = $app->s3url;
+		$dirpath           = $app->dirpath;
 		$sparkle_key       = $app->sparkle_key;
 		$sparkle_pkey      = $app->sparkle_pkey;
 		$ap_key            = $app->ap_key;
@@ -146,13 +152,21 @@ Basic Stuff
 </div>
 
 <div class="form-group">
-<label for="link">Info URL</label>
+<label for="link">Base Download URL</label>
 <input type="text" name="link" id="link" value="<?PHP echo $link; ?>" class="form-control">
 <br>
 <div class="alert alert-info">
-<span class="info">Ex: Your application's product page</span>
+<span class="info">Ex: Your application's base download url</span>
 </div></div>
 
+
+<div class="form-group">
+<label for="dirpath">Base File Directory Path</label>
+<input type="text" name="dirpath" id="dirpath" value="<?PHP echo $dirpath; ?>" class="form-control">
+<br>
+<div class="alert alert-info">
+<span class="info">Ex: Your application's base upload file path</span>
+</div></div>
 
 <div class="form-group">
 <label for="url">Bundle Name</label>
@@ -207,6 +221,10 @@ File Storage
 
 <div class="card-body">
 
+<div class="form-group">
+<label for="s3url">Amazon S3 URL</label>
+<input type="text" class="form-control" name="s3url" id="s3url" value="<?PHP echo $s3url; ?>">
+</div>
 
 <div class="form-group">
 <label for="s3key">Amazon S3 Key</label>
