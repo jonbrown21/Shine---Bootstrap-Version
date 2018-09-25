@@ -26,12 +26,12 @@
                    '{$_POST['reguser']}',
                    '{$_POST['regmail']}')";
 
-    mysql_query($query, $db->db) or die('error');
+    mysqli_query($db->db, $query) or die(mysqli_error($db));
 
-	$link = 'http://shine.jonbrown.org/feedback-view.php?id=' . $db->insertId();
+    $link = 'https://shine.jonbrown.org/feedback-view.php?id=' . $db->insertId();
 
     $message  = "$link\n\n";
-	$message .= "From: {$_POST['email']}\n";
+    $message .= "From: {$_POST['email']}\n";
     $message .= "Version: {$_POST['appversion']}\n";
     $message .= "System Version: {$_POST['systemversion']}\n";
     $message .= "Importance: {$_POST['importance']}\n";
