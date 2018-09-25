@@ -4,6 +4,7 @@
 	$Auth->requireAdmin('login.php');
 	$nav = 'applications';
 	$path = '/var/www/files/';
+	$s3bucketurl = 'http://shine2.jonbrown.org.s3-website-us-east-1.amazonaws.com';
 	$app = new Application($_GET['id']);
 
 	if(!$app->ok()) redirect('index.php');
@@ -31,16 +32,20 @@
 			$object = slash($info['path']) . $object;
 			chmod($_FILES['file']['tmp_name'], 0755);
 
-			// Manually update / upload the file for the Sparkle update
-			// Put the full path to the applications upload folder in the S3 URL field.
+			$radio_value = $_POST["exampleRadios"];
+
+			if ($radio_value == 'local') {
 
 			move_uploaded_file( $_FILES['file']['tmp_name'], $_POST['dir'] . basename( $_FILES['file']['name'] ) );
 			$v->url = slash($app->link) . $_FILES['file']['name'];
 
-			// Not using S3 for hosting of our Sparkle Updates
+			} else {
 
-			//$s3 = new S3($app->s3key, $app->s3pkey);
-			//$s3->uploadFile($app->s3bucket, $object, $_FILES['file']['tmp_name'], true);
+			$s3 = new S3($app->s3key, $app->s3pkey);
+			$s3->uploadFile($app->s3bucket, $object, $_FILES['file']['tmp_name'], true);
+			$v->url = slash($s3bucketurl) . $object;
+			}
+
 			$v->insert();
 
 			redirect('versions.php?id=' . $app->id);
@@ -118,7 +123,22 @@ print_r($output);
 							<form action="version-new.php?id=<?PHP echo $app->id; ?>" method="post" enctype="multipart/form-data">
 								<p><label for="version_number">Sparkle Version Number</label> <input type="text" name="version_number" id="version_number" value="<?PHP echo $version_number;?>" class="form-control"></p>
 								<p><label for="human_version">Human Readable Version Number</label> <input type="text" name="human_version" id="human_version" value="<?PHP echo $human_version;?>" class="form-control"></p>
-								<p><label for="release_notes">Release Notes</label> <textarea class="form-control" name="release_notes" id="release_notes"><?PHP echo $release_notes; ?></textarea></p>
+								<p><label for="release_notes">Release Notes</label> <textarea class="form-control" name="release_notes" id="release_notes"><?PHP echo $release_notes; ?></textarea></p
+
+								<p>
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="amazon" checked>
+  <label class="form-check-label" for="exampleRadios1">
+    Are you using Amazon? Yes.
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="local">
+  <label class="form-check-label" for="exampleRadios2">
+    Are you uploading locally? Yes.
+  </label>
+</div>
+								</p>			
 								<!-- Make sure that when you set the upload directory you must set the path relative to your shine installation use ../ relative up / down directory path indicators in the text field -->
                                                                 <p><label for="dir">Base Dir</label> <input type="text" name="dir" id="dir" value="<?php echo $path; ?>" class="form-control"></p>
                                                                 <p><label for="file">Application Archive</label> <input type="file" name="file" id="file" class="form-control"></p>
