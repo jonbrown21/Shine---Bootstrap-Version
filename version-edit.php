@@ -57,7 +57,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            Create Manual Order
+                            Edit Version
                         </div>
                         <div class="card-body">
                             <div class="row">
