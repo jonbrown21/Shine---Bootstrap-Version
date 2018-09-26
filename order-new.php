@@ -22,10 +22,10 @@
 			$o->type        = 'Manual';
 			$o->dt          = dater();
 			$o->item_name   = $app->name;
+			$o->notes	= $_POST['notes'];
+
 			$o->insert();
-
 			$o->generateLicense();
-
 			redirect('order.php?id=' . $o->id);
 		}
 		else
