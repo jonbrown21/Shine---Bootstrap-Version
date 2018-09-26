@@ -48,10 +48,3 @@ error_reporting(E_ALL);
     $Error = ErrorApp::getError();
 
     $nav = '';
-
-	$settings = array(
-    'oauth_access_token' => "<token>",
-    'oauth_access_token_secret' => "<secret>",
-    'consumer_key' => "<key>",
-    'consumer_secret' => "<secret>"
-	);

@@ -14,6 +14,15 @@
 	define('POSTMARKAPP_MAIL_FROM_ADDRESS', '');
 	define('POSTMARKAPP_MAIL_FROM_NAME', '');
 
+
+	$settings = array(
+    'oauth_access_token' => "<token>",
+    'oauth_access_token_secret' => "<secret>",
+    'consumer_key' => "<key>",
+    'consumer_secret' => "<secret>"
+	);
+	
+	
     class Config
     {
         // Singleton object. Leave $me alone.
