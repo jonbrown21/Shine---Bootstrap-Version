@@ -1,6 +1,6 @@
 <?PHP
     require_once('includes/master.inc.php');
-    require_once('includes/class.config.php');
+    include('includes/class.config.php');
     require_once('TwitterAPIExchange.php');
 
     $db = Database::getDatabase();
@@ -14,6 +14,8 @@
             $term = trim($term);
             if(strlen($term) > 0)
             {
+
+global $settings;
 
 $url = 'https://api.twitter.com/1.1/search/tweets.json';
 $getfield = '?q=#' . urlencode($term) . '&result_type=recent';
