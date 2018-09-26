@@ -1,5 +1,6 @@
 <?PHP
     require_once('includes/master.inc.php');
+    require_once('includes/class.config.php');
     require_once('TwitterAPIExchange.php');
 
     $db = Database::getDatabase();

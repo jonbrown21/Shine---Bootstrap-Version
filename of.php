@@ -28,7 +28,7 @@
 
     mysqli_query($db->db, $query) or die(mysqli_error($db->db));
 
-    $link = 'https://shine.jonbrown.org/feedback-view.php?id=' . $db->insertId();
+    $link = $_SERVER['SERVER_NAME'] . '/feedback-view.php?id=' . $db->insertId();
 
     $message  = "$link\n\n";
     $message .= "From: {$_POST['email']}\n";
