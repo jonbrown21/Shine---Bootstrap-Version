@@ -26,7 +26,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            Create order
+                            General Settings
                         </div>
                         <div class="card-body">
                             <div class="row">

@@ -67,22 +67,19 @@
 	// but it's PHP 5.3+ only. Too early to force that requirement
 	// upon users.
 
+
 function sign_file($filename, $keydata)
     {
-
-$output = shell_exec('openssl version 2>&1');
-print_r($output);
-
         $binary_hash = shell_exec('/usr/bin/openssl dgst -sha1 -binary < ' . $filename);
-        $hash_tmp_file = tempnam('/tmp', 'foo');
+        $hash_tmp_file = tempnam($app->dirpath, 'foo');
         file_put_contents($hash_tmp_file, $binary_hash);
 
-        $key_tmp_file = tempnam('/tmp', 'bar');
+        $key_tmp_file = tempnam($app->dirpath, 'bar');
         if(strpos($keydata, '-----BEGIN DSA PRIVATE KEY-----') === false)
             $keydata = "-----BEGIN DSA PRIVATE KEY-----\n" . $keydata . "\n-----END DSA PRIVATE KEY-----\n";
         file_put_contents($key_tmp_file, $keydata);
 
-        $signed_data = shell_exec("/usr/bin/openssl dgst -dss1 -sign $key_tmp_file < $hash_tmp_file");
+        $signed_data = shell_exec("/usr/bin/openssl dgst -sha1 -sign $key_tmp_file < $hash_tmp_file");
 
         return base64_encode($signed_data);
     }

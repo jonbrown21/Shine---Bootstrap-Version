@@ -32,12 +32,11 @@
 		redirect('orders.php');
 	}
 
-	if(isset($_POST['btnNotes']))
+	if(isset($_POST['submit']))
 	{
 		$o->notes = $_POST['notes'];
 		$o->update();
 		redirect('order.php?id=' . $o->id);
-		echo "<script>alert('new message');</script>";
 	}
 
 	$app = new Application($o->app_id);

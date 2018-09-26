@@ -41,7 +41,7 @@
 
 <div class="card">
                         <div class="card-header">
-                            Your Applications
+                            User Accounts
                         </div>
                         <!-- /.card-heading -->
  <div class="card-body">
