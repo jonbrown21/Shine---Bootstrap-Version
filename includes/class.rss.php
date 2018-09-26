@@ -39,7 +39,7 @@
 
         public function loadRecordset($result, $title, $link, $description, $pub_date)
         {
-            while($row = mysql_fetch_array($result, MYSQL_ASSOC))
+            while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
             {
                 $item = new RSSItem();
                 $item->title       = $row[$title];

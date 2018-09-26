@@ -6,7 +6,7 @@
     $db = Database::getDatabase();
 
     foreach($_POST as $key => $val)
-        $_POST[$key] = mysql_real_escape_string($val, $db->db);
+        $_POST[$key] = mysqli_real_escape_string($db->db, $val);
 
     $dt = date('Y-m-d H:i:s');
 
@@ -26,7 +26,7 @@
                    '{$_POST['reguser']}',
                    '{$_POST['regmail']}')";
 
-    mysql_query($query, $db->db) or die('error');
+    mysqli_query($db->db, $query) or die('error');
 
 	$link = 'http://shine.jonbrown.org/feedback-view.php?id=' . $db->insertId();
 

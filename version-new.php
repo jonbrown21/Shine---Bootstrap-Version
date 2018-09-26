@@ -51,6 +51,8 @@
 			
 			//$s3 = new S3($app->s3key, $app->s3pkey);
 			//$s3->uploadFile($app->s3bucket, $object, $_FILES['file']['tmp_name'], true);
+      //echo var_dump($v);
+      //exit(0);
 			$v->insert();
 
 			redirect('versions.php?id=' . $app->id);
