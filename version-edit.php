@@ -42,9 +42,9 @@
 <h1 class="page-header">Applications</h1>
 
 <ul class="nav nav-pills">
-<li><a href="application.php?id=<?PHP echo $app->id; ?>"><?PHP echo $app->name; ?></a></li>
-<li class="active"><a href="versions.php?id=<?PHP echo $app->id; ?>">Versions</a></li>
-<li><a href="version-new.php?id=<?PHP echo $app->id; ?>">Release New Version</a></li>
+<li class="nav-link"><a href="application.php?id=<?PHP echo $app->id; ?>" class="nav-link"><?PHP echo $app->name; ?></a></li>
+<li class="nav-link"><a href="versions.php?id=<?PHP echo $app->id; ?>" class="nav-link active">Versions</a></li>
+<li class="nav-link"><a href="version-new.php?id=<?PHP echo $app->id; ?>" class="nav-link">Release New Version</a></li>
 </ul>
 
 </div>
@@ -55,11 +55,11 @@
 
 <div class="row">
                 <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Create Manual Order
+                    <div class="card">
+                        <div class="card-header">
+                            Edit Version
                         </div>
-                        <div class="panel-body">
+                        <div class="card-body">
                             <div class="row">
   
                                 <div class="col-lg-12">

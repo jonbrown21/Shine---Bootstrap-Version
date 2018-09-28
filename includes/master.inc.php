@@ -1,4 +1,8 @@
 <?PHP
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 	date_default_timezone_set('America/Chicago');
 
     // Application flag
@@ -44,10 +48,3 @@
     $Error = ErrorApp::getError();
 
     $nav = '';
-
-	$settings = array(
-    'oauth_access_token' => "<token>",
-    'oauth_access_token_secret' => "<secret>",
-    'consumer_key' => "<key>",
-    'consumer_secret' => "<secret>"
-	);

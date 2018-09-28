@@ -31,7 +31,7 @@
     {
         public function __construct($id = null)
         {
-            parent::__construct('shine_applications', array('name', 'link', 'bundle_name', 'upgrade_app_id', 's3key', 's3pkey', 's3bucket', 's3path', 'sparkle_key', 'sparkle_pkey', 'ap_key', 'ap_pkey', 'from_email', 'email_subject', 'email_body', 'license_filename', 'custom_salt', 'license_type', 'return_url', 'fs_security_key', 'i_use_this_key', 'tweet_terms', 'hidden', 'engine_class_name'), $id);
+            parent::__construct('shine_applications', array('name', 'link', 'bundle_name', 'upgrade_app_id', 's3key', 's3pkey', 's3bucket', 's3path','s3url', 'dirpath', 'sparkle_key', 'sparkle_pkey', 'ap_key', 'ap_pkey', 'from_email', 'email_subject', 'email_body', 'license_filename', 'custom_salt', 'license_type', 'return_url', 'fs_security_key', 'i_use_this_key', 'tweet_terms', 'hidden', 'engine_class_name'), $id);
         }
 
 		public function engine()
@@ -199,7 +199,7 @@
     {
         public function __construct($id = null)
         {
-            parent::__construct('shine_orders', array('app_id', 'dt', 'txn_type', 'first_name', 'last_name', 'residence_country', 'item_name', 'payment_gross', 'mc_currency', 'business', 'payment_type', 'verify_sign', 'payer_status', 'tax', 'payer_email', 'txn_id', 'quantity', 'receiver_email', 'payer_id', 'receiver_id', 'item_number', 'payment_status', 'payment_fee', 'mc_fee', 'shipping', 'mc_gross', 'custom', 'license', 'type', 'deleted', 'hash', 'claimed', 'serial_number', 'notes', 'upgrade_coupon', 'deactivated'), $id);
+            parent::__construct('shine_orders', array('app_id', 'dt', 'txn_type', 'first_name', 'last_name', 'residence_country', 'item_name', 'payment_gross', 'mc_currency', 'business', 'payment_type', 'verify_sign', 'payer_status', 'tax', 'payer_email', 'txn_id', 'quantity', 'receiver_email', 'payer_id', 'receiver_id', 'item_number', 'payment_status', 'payment_fee', 'mc_fee', 'shipping', 'mc_gross', 'custom', 'license', 'type', 'deleted', 'hash', 'claimed', 'serial_number', 'notes', 'upgrade_coupon', 'deactivated', 'notes'), $id);
         }
 
 		public function activationCount()
@@ -259,7 +259,7 @@
 		{
 			if($expires > 0) $expires += time();
 			$hash = md5($this->id . $expires . Config::get('authSalt'));
-			$link = 'http://' . $_SERVER['HTTP_HOST'] . WEB_ROOT . 'license.php?id=' . $this->id . '&x=' . $expires . '&h=' . $hash;
+			$link = 'http://' . $_SERVER['HTTP_HOST'] . '/license.php?id=' . $this->id . '&x=' . $expires . '&h=' . $hash;
 			return $link;
 		}
 		

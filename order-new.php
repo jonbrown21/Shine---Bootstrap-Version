@@ -22,10 +22,10 @@
 			$o->type        = 'Manual';
 			$o->dt          = dater();
 			$o->item_name   = $app->name;
+			$o->notes	= $_POST['notes'];
+
 			$o->insert();
-
 			$o->generateLicense();
-
 			redirect('order.php?id=' . $o->id);
 		}
 		else
@@ -69,7 +69,7 @@
 								<p><label for="first_name">First Name</label> <input type="text" name="first_name" id="first_name" value="<?PHP echo $first_name; ?>" class="form-control"></p>
 								<p><label for="last_name">Last Name</label> <input type="text" name="last_name" id="last_name" value="<?PHP echo $last_name; ?>" class="form-control"></p>
 								<p><label for="email">Email</label> <input type="text" name="email" id="email" value="<?PHP echo $email; ?>" class="form-control"></p>
-								<p><label for="notes">Notes</label> <textarea name="notes" id="notes" class="form-control"><?PHP echo $notes; ?></textarea></p>
+								<p><label for="notes">Notes</label> <textarea name="notes" id="notes" class="form-control"></textarea></p>
 								<br><p><input type="submit" name="btnCreateOrder" value="Create Order" id="btnCreateOrder" class="btn btn-lg btn-success btn-block"></p>
 							</form>
                                 </div>

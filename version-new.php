@@ -1,21 +1,11 @@
 <?PHP
 
-	// Try and allow for 3 hours, just in case...
-	@set_time_limit(10800);
-
-	// Try and set some ini settings to buy us some time...
-	@ini_set('memory_limit', '512M');
-	@ini_set('upload_max_filesize', '512M');
-	@ini_set('post_max_size', '550M');
-	@ini_set('session.gc_maxlifetime', '10800');  // Allows for up to 3 hours
-	@ini_set('max_input_time', '10800');  // Allows for up to 3 hours
-	@ini_set('max_execution_time', '10800'); // Allows for up to 3 hours
-
 	require 'includes/master.inc.php';
 	$Auth->requireAdmin('login.php');
 	$nav = 'applications';
-	
+
 	$app = new Application($_GET['id']);
+
 	if(!$app->ok()) redirect('index.php');
 
 	if(isset($_POST['btnCreateVersion']))
@@ -23,7 +13,7 @@
 		$Error->blank($_POST['version_number'], 'Version Number');
 		$Error->blank($_POST['human_version'], 'Human Readable Version Number');
 		$Error->upload($_FILES['file'], 'file');
-		
+
 		if($Error->ok())
 		{
 			$v = new Version();
@@ -35,24 +25,27 @@
 			$v->downloads      = 0;
 			$v->filesize       = filesize($_FILES['file']['tmp_name']);
 			$v->signature      = sign_file($_FILES['file']['tmp_name'], $app->sparkle_pkey);
-			
+
 			$object = strtolower(preg_replace('/[^a-zA-Z0-9]/', '', $app->name)) . "_" . $v->version_number . "." . substr($_FILES['file']['name'], -3);
 			$info   = parse_url($app->s3path);
 			$object = slash($info['path']) . $object;
-			chmod($_FILES['file']['tmp_name'], 0755);	
-			
-			// Manually update / upload the file for the Sparkle update
-			// Put the full path to the applications upload folder in the S3 URL field.
-			
-			move_uploaded_file( $_FILES['file']['tmp_name'], $_POST['dir'] . basename( $_FILES['file']['name'] ) );
-			$v->url = slash($app->s3path) . $_FILES['file']['name'];
-			
-			// Not using S3 for hosting of our Sparkle Updates
-			
-			//$s3 = new S3($app->s3key, $app->s3pkey);
-			//$s3->uploadFile($app->s3bucket, $object, $_FILES['file']['tmp_name'], true);
-      //echo var_dump($v);
-      //exit(0);
+
+			chmod($_FILES['file']['tmp_name'], 0755);
+
+			$radio_value = $_POST["exampleRadios"];
+
+			if ($radio_value == 'local') {
+
+			move_uploaded_file( $_FILES['file']['tmp_name'], $app->dirpath . basename( $_FILES['file']['name'] ) );
+			$v->url = slash($app->link) . $_FILES['file']['name'];
+
+			} else {
+
+			$s3 = new S3($app->s3key, $app->s3pkey);
+			$s3->uploadFile($app->s3bucket, $object, $_FILES['file']['tmp_name'], true);
+			$v->url = slash($app->s3url) . $object;
+			}
+      
 			$v->insert();
 
 			redirect('versions.php?id=' . $app->id);
@@ -70,24 +63,26 @@
 		$human_version  = '';
 		$release_notes  = '';
 	}
-	
+
 	// It would be better to use PHP's native OpenSSL extension
 	// but it's PHP 5.3+ only. Too early to force that requirement
 	// upon users.
-    function sign_file($filename, $keydata)
+
+
+function sign_file($filename, $keydata)
     {
         $binary_hash = shell_exec('/usr/bin/openssl dgst -sha1 -binary < ' . $filename);
-        $hash_tmp_file = tempnam('/tmp', 'foo');
+        $hash_tmp_file = tempnam($app->dirpath, 'foo');
         file_put_contents($hash_tmp_file, $binary_hash);
 
-        $key_tmp_file = tempnam('/tmp', 'bar');
+        $key_tmp_file = tempnam($app->dirpath, 'bar');
         if(strpos($keydata, '-----BEGIN DSA PRIVATE KEY-----') === false)
-            $keydata = "-----BEGIN DSA PRIVATE KEY-----\n" . $keydata . "\n-----END DSA PRIVATE KEY-----\n";        
+            $keydata = "-----BEGIN DSA PRIVATE KEY-----\n" . $keydata . "\n-----END DSA PRIVATE KEY-----\n";
         file_put_contents($key_tmp_file, $keydata);
 
-        $signed_data = shell_exec("/usr/bin/openssl dgst -dss1 -sign $key_tmp_file < $hash_tmp_file");
+        $signed_data = shell_exec("/usr/bin/openssl dgst -sha1 -sign $key_tmp_file < $hash_tmp_file");
 
-        return base64_encode($signed_data);     
+        return base64_encode($signed_data);
     }
 ?>
 <?PHP include('inc/header.inc.php'); ?>
@@ -115,20 +110,33 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            Create Manual Order
+                            Create Version
                         </div>
                         <div class="card-body">
                             <div class="row">
-  
+
                                 <div class="col-lg-12">
-                                    
-<form action="version-new.php?id=<?PHP echo $app->id; ?>" method="post" enctype="multipart/form-data">
+
+							<form action="version-new.php?id=<?PHP echo $app->id; ?>" method="post" enctype="multipart/form-data">
 								<p><label for="version_number">Sparkle Version Number</label> <input type="text" name="version_number" id="version_number" value="<?PHP echo $version_number;?>" class="form-control"></p>
 								<p><label for="human_version">Human Readable Version Number</label> <input type="text" name="human_version" id="human_version" value="<?PHP echo $human_version;?>" class="form-control"></p>
-								<p><label for="release_notes">Release Notes</label> <textarea class="text" name="release_notes" id="release_notes"><?PHP echo $release_notes; ?></textarea></p>
-								
+								<p><label for="release_notes">Release Notes</label> <textarea class="form-control" name="release_notes" id="release_notes"><?PHP echo $release_notes; ?></textarea></p
+
+								<p>
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="amazon" checked>
+  <label class="form-check-label" for="exampleRadios1">
+    Are you using Amazon? Yes.
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="local">
+  <label class="form-check-label" for="exampleRadios2">
+    Are you uploading locally? Yes.
+  </label>
+</div>
+								</p>			
 								<!-- Make sure that when you set the upload directory you must set the path relative to your shine installation use ../ relative up / down directory path indicators in the text field -->
-                                                                <p><label for="dir">Base Dir</label> <input type="text" name="dir" id="dir" value="" class="form-control"></p>
                                                                 <p><label for="file">Application Archive</label> <input type="file" name="file" id="file" class="form-control"></p>
 								<p><input type="submit" name="btnCreateVersion" value="Create Version" id="btnCreateVersion" class="btn btn-lg btn-success btn-block"></p>
 							</form>

@@ -79,15 +79,15 @@
 
 <ul class="nav nav-pills">
 <?PHP if(!isset($_GET['id'])): ?>
-    <li class="nav-link" data-toggle="pill"><a class="nav-link active" href="orders.php">All Orders</a></li>
+    <li class="nav-link"><a class="nav-link active" href="orders.php">All Orders</a></li>
 <?php else: ?>
-    <li class="nav-link" data-toggle="pill"><a class="nav-link" href="orders.php">All Orders</a></li>
+    <li class="nav-link"><a class="nav-link" href="orders.php">All Orders</a></li>
 <?php endif; ?>
 <?PHP foreach($applications as $a) : if(!in_array($a->id, $available_apps)) continue; ?>
     <?PHP if(@$_GET['id'] == $a->id): ?>
-        <li class="nav-link"><a class="nav-link active" href="orders.php?id=<?PHP echo $a->id; ?>" data-toggle="pill"><?PHP echo $a->name; ?></a></li>
+        <li class="nav-link"><a class="nav-link active" href="orders.php?id=<?PHP echo $a->id; ?>"><?PHP echo $a->name; ?></a></li>
     <?php else: ?>
-        <li class="nav-link"><a class="nav-link" href="orders.php?id=<?PHP echo $a->id; ?>" data-toggle="pill"><?PHP echo $a->name; ?></a></li>
+        <li class="nav-link"><a class="nav-link" href="orders.php?id=<?PHP echo $a->id; ?>"><?PHP echo $a->name; ?></a></li>
     <?php endif; ?>
 <?PHP endforeach; ?>
 </ul>

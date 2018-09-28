@@ -42,7 +42,7 @@
 				$this->data[$x] = $y;
 			}
 		}
-		
+
 		public function render()
 		{
 			$this->run();
@@ -88,7 +88,7 @@
     <?PHP if(!isset($_GET['id'])): ?>
         <li class="nav-link"><a class="nav-link active" href="stats.php">All Apps</a></li>
     <?php else: ?>
-        <li class="nav-link"><a class="nav-link active" href="stats.php">All Apps</a></li>
+        <li class="nav-link"><a class="nav-link" href="stats.php">All Apps</a></li>
     <?php endif; ?>
     <?PHP foreach($applications as $a) : ?>
         <?PHP if(@$_GET['id'] == $a->id): ?>
@@ -113,25 +113,20 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <div class="row">
-                                <div style="margin: 20px;">
+                            <div class="row" id="chart" style="margin: 20px;" >
 
-			<canvas id="canvas3"></canvas>
+				<canvas id="canvas3"></canvas>
 
-                                </div>
                                 <!-- /.col-lg-8 (nested) -->
                             </div>
-                    
-
 
 </div>
 
-	</div>						
-					
-
+	</div>
 <?PHP include('inc/footer.inc.php'); ?>
-<script type="text/javascript" charset="utf-8">
 
+<script type="text/javascript" charset="utf-8">
+var chartwidth = $('#chart').width();
 var options = {
         scaleFontColor: "#fa0",
         datasetStrokeWidth: 1,
@@ -139,7 +134,7 @@ var options = {
         animation : false,
         bezierCurve : true,
         scaleStartValue: 0,
-		showXLabels: 1,
+	showXLabels: 1,
     };
 
 	$(document).ready(function() {

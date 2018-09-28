@@ -32,7 +32,7 @@
 		redirect('orders.php');
 	}
 
-	if(isset($_POST['btnNotes']))
+	if(isset($_POST['submit']))
 	{
 		$o->notes = $_POST['notes'];
 		$o->update();
@@ -61,12 +61,12 @@
 
 
                 <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
+                    <div class="card card-default">
+                        <div class="card-header">
                             Order #<?PHP echo $o->id; ?><?PHP if($o->deactivated == 1) : ?> (Deactivated) <?PHP endif; ?>
                         </div>
                         <!-- /.panel-heading -->
-                        <div class="panel-body">
+                        <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-striped">
 
@@ -89,18 +89,18 @@
 
 <div class="row">
                 <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
+                    <div class="card card-default">
+                        <div class="card-header">
                             Order Notes
                         </div>
                         <!-- /.panel-heading -->
-                        <div class="panel-body">
+                        <div class="card-body">
                             <form action="order.php?id=<?PHP echo $o->id; ?>" method="post" class="bd">
-								<textarea style="width:100%;" name="notes" id="notes" class="form-control"><?PHP echo $o->notes; ?></textarea>
+								<textarea  name="notes" id="notes" class="form-control"><?PHP echo $o->notes; ?></textarea>
 <br>
 								<input type="submit" name="btnNotes" value="Save Notes" id="btnNotes" class="btn btn-lg btn-success btn-block">
 <br>
-								<div class="alert alert-info"><span class="info">Notes will NOT be sent or made visible to customers.</span></div>
+</form>								<div class="alert alert-info"><span class="info">Notes will NOT be sent or made visible to customers.</span></div>
 							
                         </div>
                         <!-- /.panel-body -->
@@ -111,12 +111,12 @@
        
 <div class="row">
                 <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
+                    <div class="card card-default">
+                        <div class="card-header">
                             Customer Info
                         </div>
                         <!-- /.panel-heading -->
-                        <div class="panel-body">
+                        <div class="card-body">
                             <div id="rapportive" class="bd"></div>
                         </div>
                         <!-- /.panel-body -->
@@ -129,12 +129,12 @@
 
 <div class="row">
                 <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
+                    <div class="card card-default">
+                        <div class="card-header">
                             Related Orders and Activations
                         </div>
                         <!-- /.panel-heading -->
-                        <div class="panel-body">
+                        <div class="card-body">
                             <p><a href="activations.php?q=<?PHP echo $o->payer_email; ?>">Activated <?PHP echo $o->activationCount(); ?> times</a></p>
 					    <table class="table table-striped">
 					        <thead>
@@ -163,19 +163,19 @@
 
 <div class="row">
                 <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
+                    <div class="card card-default">
+                        <div class="card-header">
                             License Options
                         </div>
                         <!-- /.panel-heading -->
-                        <div class="panel-body">
+                        <div class="card-body">
                             <ul class="biglist">
-							<li><a href="order.php?id=<?PHP echo $o->id; ?>&amp;act=email" id="email">Email to User</a></li>
-							<li><a href="<?PHP echo $o->getDownloadLink(); ?>">Download Link (does not expire)</a></li>
-							<li><a href="<?PHP echo $o->getDownloadLink(86400); ?>">Download Link (1 day)</a></li>
-							<li><a href="<?PHP echo $o->getDownloadLink(86400 * 3); ?>">Download Link (3 days)</a></li>
-							<li><a href="<?PHP echo $o->getDownloadLink(86400 * 7); ?>">Download Link (1 week)</a></li>
-							<li><a href="order.php?id=<?PHP echo $o->id; ?>&amp;act=deactivate" id="deactivate">Deactivate License</a></li>
+							<li><a class="btn btn-secondary btn-block" href="order.php?id=<?PHP echo $o->id; ?>&amp;act=email" id="email">Email to User</a></li><br>
+							<li><a class="btn btn-secondary btn-block" href="<?PHP echo $o->getDownloadLink(); ?>">Download Link (does not expire)</a></li><br>
+							<li><a class="btn btn-secondary btn-block" href="<?PHP echo $o->getDownloadLink(86400); ?>">Download Link (1 day)</a></li><br>
+							<li><a class="btn btn-secondary btn-block" href="<?PHP echo $o->getDownloadLink(86400 * 3); ?>">Download Link (3 days)</a></li><br>
+							<li><a class="btn btn-secondary btn-block" href="<?PHP echo $o->getDownloadLink(86400 * 7); ?>">Download Link (1 week)</a></li><br>
+							<li><a class="btn btn-secondary btn-block" href="order.php?id=<?PHP echo $o->id; ?>&amp;act=deactivate" id="deactivate">Deactivate License</a></li>
 						</ul>
                         </div>
                         <!-- /.panel-body -->
@@ -189,17 +189,17 @@
 
 <div class="row">
                 <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
+                    <div class="card card-default">
+                        <div class="card-header">
                             Order Options
                         </div>
                         <!-- /.panel-heading -->
-                        <div class="panel-body">
+                        <div class="card-body">
                             <ul class="biglist">
 							<?PHP if($app->upgrade_app_id > 0) : ?>
-							<li><a href="order.php?id=<?PHP echo $o->id; ?>&amp;act=upgrade" id="upgrade">Upgrade Order</a></li>
+							<li><a class="btn" href="order.php?id=<?PHP echo $o->id; ?>&amp;act=upgrade" id="upgrade">Upgrade Order</a></li>
 							<?PHP endif; ?>
-							<li><a href="order.php?id=<?PHP echo $o->id; ?>&amp;act=delete" id="delete">Delete Order</a></li>
+							<li><a href="order.php?id=<?PHP echo $o->id; ?>&amp;act=delete" id="delete" class="btn btn-danger">Delete Order</a></li>
 						</ul>
                         </div>
                         <!-- /.panel-body -->
@@ -210,12 +210,12 @@
 
 <div class="row">
                 <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
+                    <div class="card card-default">
+                        <div class="card-header">
                             Cut &amp; Paste License
                         </div>
                         <!-- /.panel-heading -->
-                        <div class="panel-body">
+                        <div class="card-body">
                             <?PHP if($app->engine_class_name == 'aquaticprime') : ?>
 						<textarea style="width:100%;" class="form-control"><?PHP echo $o->license; ?></textarea>
 						<?PHP elseif($app->engine_class_name == 'dual') : ?>

@@ -11,3 +11,11 @@
 .sidebar.navbar-nav.toggled .new-app {
     display: none;
 }
+.card {
+    margin-bottom: 60px !important;
+}
+.biglist {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
