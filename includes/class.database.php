@@ -55,14 +55,6 @@
             return is_object($this->db);
         }
 
-        // Do we have a valid database connection and have we selected a database?
-        public function databaseSelected()
-        {
-            if(!$this->isConnected()) return false;
-            $result = mysql_list_tables($this->name, $this->db);
-            return is_resource($result);
-        }
-
         public function connect()
         {
             $this->db = mysqli_connect($this->host, $this->username, $this->password, $this->name) or $this->notify();

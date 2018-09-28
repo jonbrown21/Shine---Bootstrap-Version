@@ -26,7 +26,7 @@
                    '{$_POST['reguser']}',
                    '{$_POST['regmail']}')";
 
-    mysqli_query($db->db, $query) or die(mysqli_error($db->db));
+    mysqli_query($db->db, $query) or die('error');
 
     $link = $_SERVER['SERVER_NAME'] . '/feedback-view.php?id=' . $db->insertId();
 
