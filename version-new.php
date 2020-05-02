@@ -29,6 +29,7 @@
 			$object = strtolower(preg_replace('/[^a-zA-Z0-9]/', '', $app->name)) . "_" . $v->version_number . "." . substr($_FILES['file']['name'], -3);
 			$info   = parse_url($app->s3path);
 			$object = slash($info['path']) . $object;
+
 			chmod($_FILES['file']['tmp_name'], 0755);
 
 			$radio_value = $_POST["exampleRadios"];
@@ -44,7 +45,7 @@
 			$s3->uploadFile($app->s3bucket, $object, $_FILES['file']['tmp_name'], true);
 			$v->url = slash($app->s3url) . $object;
 			}
-
+      
 			$v->insert();
 
 			redirect('versions.php?id=' . $app->id);

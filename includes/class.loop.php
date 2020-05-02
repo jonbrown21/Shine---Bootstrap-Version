@@ -44,5 +44,5 @@
     //
     // Or
     //
-    // while($row = mysql_fetch_array($result))
+    // while($row = mysqli_fetch_array($result))
     //      echo "<tr color'$color'>the row colors will alternate</tr>";
